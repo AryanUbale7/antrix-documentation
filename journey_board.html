@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antrix AI V2 — Engineering War Room Board</title>
-  <!-- Google Fonts for whiteboard feel -->
+  <title>Antrix AI V2 — Engineering Journey Map</title>
+  <!-- Google Fonts for professional and handwriting contrast -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Kalam:wght@300;400;700&family=Architects+Daughter&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -12,10 +12,10 @@
   <style>
     :root {
       --bg-canvas: #FFFFFF;
-      --border-slate: #1E293B;
+      --border-slate: #0F172A;
       
       --color-blue: #EFF6FF;
-      --border-blue: #3B82F6;
+      --border-blue: #2563EB;
       --text-blue: #1E40AF;
       
       --color-green: #ECFDF5;
@@ -23,15 +23,15 @@
       --text-green: #065F46;
       
       --color-yellow: #FFFBEB;
-      --border-yellow: #F59E0B;
+      --border-yellow: #D97706;
       --text-yellow: #78350F;
       
       --color-pink: #FDF2F8;
-      --border-pink: #EC4899;
+      --border-pink: #DB2777;
       --text-pink: #9D174D;
       
       --color-purple: #F5F3FF;
-      --border-purple: #8B5CF6;
+      --border-purple: #7C3AED;
       --text-purple: #5B21B6;
       
       --color-red: #FEF2F2;
@@ -67,7 +67,7 @@
       overflow: hidden;
       position: relative;
       background-color: #FFFFFF;
-      background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
       background-size: 24px 24px;
       cursor: grab;
     }
@@ -81,8 +81,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 2800px;
-      height: 11000px;
+      width: 3200px;
+      height: 12000px;
       transform-origin: 0 0;
       z-index: 10;
       transition: transform 0.05s ease-out;
@@ -410,56 +410,15 @@
     }
 
     .arrowhead {
-      fill: #1E293B;
+      fill: #0F172A;
     }
 
-    /* aa STYLE ROTATING LEVEL WHEEL */
-    .aa-wheel {
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      border: 3.5px solid var(--border-slate);
-      background-color: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 4px 4px 0px var(--border-slate);
-      z-index: 30;
-      cursor: grab;
-      filter: url(#handdrawn);
-    }
-
-    .aa-wheel:active {
-      cursor: grabbing;
-    }
-
-    .aa-wheel-inner {
-      font-family: var(--font-mono);
-      font-size: 16px;
-      font-weight: 900;
-      color: #0F172A;
-      text-transform: uppercase;
-    }
-
-    .aa-wheel-label {
-      font-family: var(--font-board);
-      font-size: 10px;
-      font-weight: 700;
-      color: #64748B;
-      text-align: center;
-      margin-top: 2px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* EXCALIDRAW-STYLE CARD NODES (Orbiting pins) */
+    /* APPLE KEYNOTE SLIDE CARD STYLE */
     .node-card {
       position: absolute;
-      width: 320px;
-      min-height: 110px;
-      padding: 16px;
+      width: 540px;
+      min-height: 200px;
+      padding: 24px;
       cursor: grab;
       z-index: 20;
       transition: box-shadow 0.15s ease;
@@ -475,16 +434,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 2px solid var(--border-slate);
-      border-radius: 12px 6px 12px 6px / 6px 12px 6px 12px;
-      box-shadow: 4px 4px 0px var(--border-slate);
-      filter: url(#handdrawn);
+      border: 2.5px solid var(--border-slate);
+      border-radius: 12px;
+      box-shadow: 6px 6px 0px var(--border-slate);
       z-index: 1;
       pointer-events: none;
     }
 
     .node-card:hover .node-card-bg {
-      box-shadow: 6px 6px 0px var(--border-slate);
+      box-shadow: 8px 8px 0px var(--border-slate);
     }
 
     .node-content-wrapper {
@@ -496,75 +454,100 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 2px dashed #CBD5E1;
-      padding-bottom: 6px;
-      margin-bottom: 8px;
+      border-bottom: 2px solid #CBD5E1;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .node-title-label {
-      font-weight: 800;
-      font-size: 11px;
+      font-weight: 900;
+      font-size: 20px;
       font-family: var(--font-sans);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: -0.02em;
+      color: #0F172A;
     }
 
     .node-type-pill {
-      font-size: 9px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
       border: 1.5px solid var(--border-slate);
       background: white;
+      font-family: var(--font-sans);
     }
 
     .node-body {
-      font-size: 12px;
+      font-size: 13.5px;
       color: #334155;
-      line-height: 1.4;
-      font-weight: 500;
+      line-height: 1.5;
+      font-family: var(--font-sans);
     }
 
     .node-body strong {
       color: #0F172A;
       font-weight: 800;
       display: block;
+      margin-bottom: 6px;
+      font-size: 14.5px;
+    }
+
+    .node-body ul {
+      margin-top: 8px;
+      padding-left: 16px;
+    }
+
+    .node-body li {
       margin-bottom: 4px;
-      font-size: 13px;
+    }
+
+    /* DEBUGGING STEP CARDS (Smaller, flow-based) */
+    .node-card.problem,
+    .node-card.investigation,
+    .node-card.root_cause,
+    .node-card.fix,
+    .node-card.validation,
+    .node-card.resolved {
+      width: 480px;
+      min-height: 140px;
+      padding: 18px;
+    }
+
+    .node-card.problem .node-title-label,
+    .node-card.investigation .node-title-label,
+    .node-card.root_cause .node-title-label,
+    .node-card.fix .node-title-label,
+    .node-card.validation .node-title-label,
+    .node-card.resolved .node-title-label {
+      font-size: 16px;
     }
 
     /* CARD COLOR SYSTEM */
     .color-blue .node-card-bg { background-color: var(--color-blue); }
-    .color-blue .node-title-label { color: var(--text-blue); }
     .color-blue .node-type-pill { border-color: var(--border-blue); color: var(--text-blue); }
 
     .color-green .node-card-bg { background-color: var(--color-green); }
-    .color-green .node-title-label { color: var(--text-green); }
     .color-green .node-type-pill { border-color: var(--border-green); color: var(--text-green); }
 
     .color-yellow .node-card-bg { background-color: var(--color-yellow); }
-    .color-yellow .node-title-label { color: var(--text-yellow); }
     .color-yellow .node-type-pill { border-color: var(--border-yellow); color: var(--text-yellow); }
 
     .color-pink .node-card-bg { background-color: var(--color-pink); }
-    .color-pink .node-title-label { color: var(--text-pink); }
     .color-pink .node-type-pill { border-color: var(--border-pink); color: var(--text-pink); }
 
     .color-purple .node-card-bg { background-color: var(--color-purple); }
-    .color-purple .node-title-label { color: var(--text-purple); }
     .color-purple .node-type-pill { border-color: var(--border-purple); color: var(--text-purple); }
 
     .color-red .node-card-bg { background-color: var(--color-red); }
-    .color-red .node-title-label { color: var(--text-red); }
     .color-red .node-type-pill { border-color: var(--border-red); color: var(--text-red); }
 
     /* MIRO STICKY NOTES */
     .sticky-note {
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 190px;
+      height: 190px;
       padding: 16px;
       cursor: grab;
       z-index: 18;
@@ -609,7 +592,7 @@
 
     .sticky-text {
       font-family: var(--font-handwritten);
-      font-size: 14.5px;
+      font-size: 15px;
       line-height: 1.4;
       font-weight: 700;
       word-wrap: break-word;
@@ -761,15 +744,15 @@
 
     .live-badge-block {
       background-color: #ECFDF5;
-      border: 3px solid #10B981;
+      border: 3.5px solid #10B981;
       color: #065F46;
-      font-family: var(--font-board);
-      font-size: 20px;
+      font-family: var(--font-sans);
+      font-size: 24px;
       font-weight: 900;
       text-align: center;
-      padding: 12px 24px;
-      border-radius: 12px;
-      box-shadow: 4px 4px 0px #065F46;
+      padding: 16px 32px;
+      border-radius: 16px;
+      box-shadow: 6px 6px 0px #065F46;
       transform: rotate(-1.5deg);
       display: inline-block;
       margin-top: 10px;
@@ -834,7 +817,7 @@
   <svg class="handdrawn-filter">
     <defs>
       <filter id="handdrawn" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
@@ -842,8 +825,8 @@
 
   <!-- Board Header Panel -->
   <div class="board-header">
-    <div class="board-title-text">ANTRIX AI V2 — aa Levels Board</div>
-    <span class="board-badge">aa game timeline</span>
+    <div class="board-title-text">ANTRIX AI V2 — Engineering Journey Map</div>
+    <span class="board-badge">War Room Board</span>
   </div>
 
   <!-- Realtime Collaborators display -->
@@ -881,14 +864,14 @@
   <!-- Navigation Drawer Toggle -->
   <button class="jump-panel-toggle" onclick="toggleJumpPanel()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-    Levels select
+    Jump Panel
   </button>
 
   <!-- Left Jump Navigation Drawer -->
   <div class="jump-drawer" id="jump-drawer">
-    <h3>aa Game Levels</h3>
+    <h3>Milestones Journey</h3>
     <ul class="jump-list" id="jump-milestones-list"></ul>
-    <h3 style="margin-top: 14px;">Danger Trails</h3>
+    <h3 style="margin-top: 14px;">Debugging Paths</h3>
     <ul class="jump-list" id="jump-debugging-list"></ul>
   </div>
 
@@ -923,29 +906,38 @@
       <svg class="svg-canvas-lines" id="svg-connections">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1E293B"/>
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0F172A"/>
           </marker>
         </defs>
       </svg>
 
       <!-- Draw static background sketches on canvas -->
-      <!-- System Architecture diagram sketch (x: 150, y: 150) -->
-      <div class="whiteboard-sketch" style="left: 150px; top: 120px; width: 780px;">
+      <!-- Visual System Architecture diagram sketch (x: 150, y: 550) -->
+      <div class="whiteboard-sketch" style="left: 150px; top: 540px; width: 620px;" id="sketch-arch">
         <div class="sketch-title">System Architecture Flow Schema</div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-          <div class="sketch-box">
-            <strong style="display:block;margin-bottom:2px;">Browser UI</strong>
-            Next.js / React<br>Redux Studio Store
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="sketch-box" style="width:140px;text-align:center;">User</div>
+            <div style="color:#64748B;">➔</div>
+            <div class="sketch-box" style="width:180px;text-align:center;">Frontend Application</div>
+            <div style="color:#64748B;">➔</div>
+            <div class="sketch-box" style="width:180px;text-align:center;">Backend API Layer</div>
           </div>
-          <div style="color: #64748B; font-weight: bold;">——> HTTP / JSON ——></div>
-          <div class="sketch-box">
-            <strong style="display:block;margin-bottom:2px;">FastAPI Backend Server</strong>
-            Uvicorn / Rate Limiter<br>Postgres Schema DB
+          <div style="display:flex; align-items:center; gap:8px; padding-left: 20px;">
+            <div style="color:#64748B; padding-left: 280px;">▼</div>
           </div>
-          <div style="color: #64748B; font-weight: bold;">——> Secure Proxy ——></div>
-          <div class="sketch-box">
-            <strong style="display:block;margin-bottom:2px;">Local Inference Node</strong>
-            Secure Tunnel Layer<br>AI Processing Engine
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="sketch-box" style="width:180px;text-align:center;">Database Layer</div>
+            <div style="color:#64748B;">⬎</div>
+            <div class="sketch-box" style="width:200px;text-align:center;">AI Generation Infrastructure</div>
+            <div style="color:#64748B;">➔</div>
+            <div class="sketch-box" style="width:150px;text-align:center;">Secure Tunnel Layer</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; padding-left: 20px;">
+            <div style="color:#64748B; padding-left: 420px;">▼</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; justify-content: flex-end; padding-right:20px;">
+            <div class="sketch-box" style="width:180px;text-align:center;">Image Delivery</div>
           </div>
         </div>
         <div style="font-family: var(--font-handwritten); font-size: 13px; color: #4F46E5; text-align: center; margin-top: 4px;">
@@ -953,8 +945,8 @@
         </div>
       </div>
 
-      <!-- PostgreSQL Database schema sketch (x: 1850, y: 2200) -->
-      <div class="whiteboard-sketch" style="left: 1850px; top: 2200px; width: 620px;">
+      <!-- PostgreSQL Database schema sketch (x: 1450, y: 2200) -->
+      <div class="whiteboard-sketch" style="left: 1450px; top: 2200px; width: 620px;" id="sketch-db">
         <div class="sketch-title">PostgreSQL Database Schema Indices</div>
         <div style="display: flex; justify-content: space-between; margin-top: 8px;">
           <div class="sketch-box" style="width: 180px;">
@@ -984,8 +976,8 @@
         </div>
       </div>
 
-      <!-- local AI pipeline schema sketch (x: 150, y: 6400) -->
-      <div class="whiteboard-sketch" style="left: 150px; top: 6400px; width: 780px;">
+      <!-- local AI pipeline schema sketch (x: 150, y: 7000) -->
+      <div class="whiteboard-sketch" style="left: 150px; top: 7000px; width: 780px;" id="sketch-pipeline">
         <div class="sketch-title">AI Processing &amp; Local Caching Pipeline</div>
         <div style="display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: #334155;">
           <div>1. Frontend POST request sent to Render server -> Debit credit row inside SQL transaction lock</div>
@@ -1000,7 +992,7 @@
 
       <!-- Polaroid Snapshots -->
       <!-- Polaroid 1 -->
-      <div class="polaroid" style="left: 1750px; top: 1250px;" id="polaroid-1">
+      <div class="polaroid" style="left: 1450px; top: 1250px;" id="polaroid-1">
         <div class="tape"></div>
         <div class="polaroid-photo">
           <svg width="100%" height="100%" viewBox="0 0 200 150" fill="none">
@@ -1032,7 +1024,7 @@
       </div>
 
       <!-- Polaroid 3 -->
-      <div class="polaroid" style="left: 1800px; top: 4350px; transform: rotate(1deg);" id="polaroid-3">
+      <div class="polaroid" style="left: 1450px; top: 4350px; transform: rotate(1deg);" id="polaroid-3">
         <div class="tape"></div>
         <div class="polaroid-photo">
           <svg width="100%" height="100%" viewBox="0 0 200 150" fill="none">
@@ -1069,13 +1061,13 @@
       <div class="coffee-stain" style="left: 950px; top: 7800px;"></div>
 
       <!-- Hand-written Annotations -->
-      <div class="board-annotation" style="left: 950px; top: 220px; transform: rotate(-5deg);">Aryan: Let's avoid high-cost cloud GPU servers!</div>
-      <div class="board-annotation" style="left: 1400px; top: 880px; transform: rotate(3deg); color: #10B981;">Siddharth: System specs finalized here!</div>
-      <div class="board-annotation" style="left: 930px; top: 940px; transform: rotate(-3deg);">Emily: Next.js Studio layouts tested ok!</div>
+      <div class="board-annotation" style="left: 150px; top: 40px; transform: rotate(-3deg);">Aryan: Let's avoid high-cost cloud GPU servers!</div>
+      <div class="board-annotation" style="left: 1400px; top: 80px; transform: rotate(3deg); color: #10B981;">Siddharth: System specs finalized here!</div>
+      <div class="board-annotation" style="left: 930px; top: 90px; transform: rotate(-3deg);">Emily: Next.js Studio layouts tested ok!</div>
       <div class="board-annotation" style="left: 450px; top: 1100px; transform: rotate(-5deg); color: #EF4444;">API CORS failure was a major blocker!</div>
-      <div class="board-annotation" style="left: 2000px; top: 2500px; transform: rotate(4deg); color: #8B5CF6;">Automatic DB reflection handles missing columns!</div>
+      <div class="board-annotation" style="left: 1720px; top: 2150px; transform: rotate(4deg); color: #8B5CF6;">Automatic DB reflection handles missing columns!</div>
       <div class="board-annotation" style="left: 420px; top: 3550px; transform: rotate(-2deg); color: #EF4444;">Auth format check was dropping requests!</div>
-      <div class="board-annotation" style="left: 2020px; top: 4580px; transform: rotate(3deg); color: #3B82F6;">Celery/Redis not needed - BackgroundTasks work!</div>
+      <div class="board-annotation" style="left: 1420px; top: 4580px; transform: rotate(3deg); color: #3B82F6;">Celery/Redis not needed - BackgroundTasks work!</div>
       <div class="board-annotation" style="left: 400px; top: 5620px; transform: rotate(-4deg); color: #D97706;">Balance checked at start but subtracted later - FIXED!</div>
       <div class="board-annotation" style="left: 2000px; top: 6920px; transform: rotate(2deg); color: #EF4444;">Render free tier wipes /static directory on reload!</div>
       <div class="board-annotation" style="left: 430px; top: 8220px; transform: rotate(-3deg); color: #D97706;">Free dynamic tunnel sockets expire after 24h!</div>
@@ -1086,121 +1078,224 @@
   </div>
 
   <script>
-    // aa Level Centers definition (Milestones)
-    const levels = [
-      { id: 'lvl1', name: 'Lvl 01', label: 'Idea', x: 1250, y: 280, angle: 0, speed: 0.003, pins: [] },
-      { id: 'lvl2', name: 'Lvl 02', label: 'Research', x: 1250, y: 650, angle: 0, speed: -0.0025, pins: [] },
-      { id: 'lvl3', name: 'Lvl 03', label: 'Design', x: 1250, y: 1020, angle: 0, speed: 0.002, pins: [] },
-      { id: 'lvl4', name: 'Lvl 04', label: 'Frontend', x: 1250, y: 1420, angle: 0, speed: -0.003, pins: [] }, // CORS branch attached
-      { id: 'lvl5', name: 'Lvl 05', label: 'Backend', x: 1250, y: 2500, angle: 0, speed: 0.0025, pins: [] },
-      { id: 'lvl6', name: 'Lvl 06', label: 'Database', x: 1250, y: 2900, angle: 0, speed: -0.002, pins: [] }, // DB migration branch attached
-      { id: 'lvl7', name: 'Lvl 07', label: 'Security', x: 1250, y: 3950, angle: 0, speed: 0.003, pins: [] }, // Auth Token branch attached
-      { id: 'lvl8', name: 'Lvl 08', label: 'Verify', x: 1250, y: 5000, angle: 0, speed: -0.0025, pins: [] }, // Email latency branch attached
-      { id: 'lvl9', name: 'Lvl 09', label: 'Billing', x: 1250, y: 6050, angle: 0, speed: 0.002, pins: [] }, // Credit Race branch attached
-      { id: 'lvl10', name: 'Lvl 10', label: 'AI Infra', x: 1250, y: 7100, angle: 0, speed: -0.003, pins: [] },
-      { id: 'lvl11', name: 'Lvl 11', label: 'Deploy', x: 1250, y: 7850, angle: 0, speed: 0.0025, pins: [] }, // Ephemeral disk branch attached
-      { id: 'lvl12', name: 'Lvl 12', label: 'Testing', x: 1250, y: 8900, angle: 0, speed: -0.002, pins: [] },
-      { id: 'lvl13', name: 'Lvl 13', label: 'Bug Fix', x: 1250, y: 9350, angle: 0, speed: 0.003, pins: [] }, // Tunnel disconnect branch attached
-      { id: 'lvl14', name: 'Lvl 14', label: 'Perf', x: 1250, y: 10400, angle: 0, speed: -0.0025, pins: [] },
-      { id: 'lvl15', name: 'Lvl 15', label: 'Live', x: 1250, y: 10750, angle: 0, speed: 0.0015, pins: [] }
-    ];
-
-    // Orbiting Pin/Card items associated with levels
-    const pins = [
-      // Milestone Content Cards
-      { id: 'idea', levelId: 'lvl1', type: 'milestone', title: 'Start Milestone', category: 'Idea', label: 'Antrix AI Idea', content: 'Hybrid cloud-local architecture concept. Exclude heavy cloud GPU costs by routing requests dynamically down to private nodes.', color: 'blue', len: 230, baseAngle: 0 },
-      { id: 'research', levelId: 'lvl2', type: 'milestone', title: 'Milestone 02', category: 'Research', label: 'Research & Planning', content: 'Studying outbound port forwarding and encryption bridges. Plotting data-caching fallback directories.', color: 'green', len: 230, baseAngle: 0 },
-      { id: 'arch', levelId: 'lvl3', type: 'milestone', title: 'Milestone 03', category: 'Design', label: 'Architecture Planning', content: 'Drawing layout flowcards. Creating system specs spanning browser, api server, databases, and generative models.', color: 'yellow', len: 230, baseAngle: 0 },
-      { id: 'frontend', levelId: 'lvl4', type: 'milestone', title: 'Milestone 04', category: 'Frontend', label: 'Frontend Development', content: 'React dashboards, dynamic sliders, seed variables, canvas scaling buttons, and responsive gallery cards.', color: 'pink', len: 230, baseAngle: 1.57 },
+    // System Nodes data representing milestones, debugging pathways, and roadmap branches
+    const nodes = [
+      // ROW 1: Winding Backbone Timeline (Left-to-Right)
+      { id: 'idea', type: 'milestone', step: '01', title: 'Start: Antrix AI Idea', category: 'Idea', label: 'Antrix AI Idea', content: 'Hybrid cloud-local architecture concept. Exclude heavy cloud GPU costs by routing requests dynamically down to private nodes.', x: 200, y: 200, color: 'blue' },
+      { id: 'research', type: 'milestone', step: '02', title: 'Research & Planning', category: 'Research', label: 'Research & Planning', content: 'Studying outbound port forwarding and encryption bridges. Plotting data-caching fallback directories.', x: 850, y: 250, color: 'green' },
+      { id: 'arch', type: 'milestone', step: '03', title: 'Architecture Planning', category: 'Design', label: 'Architecture Planning', content: 'Drawing layout flowcards. Creating system specs spanning browser, api server, databases, and generative models.', x: 1500, y: 200, color: 'yellow' },
+      { id: 'frontend', type: 'milestone', step: '04', title: 'Frontend Development', category: 'Frontend', label: 'Frontend Development', content: 'React dashboards, dynamic sliders, seed variables, canvas scaling buttons, and responsive gallery cards.', x: 2150, y: 250, color: 'pink' },
       
-      // CORS Debugging (Level 4, Left Orbit Fan)
-      { id: 'cors_prob', levelId: 'lvl4', type: 'problem', title: '🔴 Problem', label: 'CORS Errors', content: 'Gallery images fail to render in browser client, producing HTTP Access-Control header drop logs.', color: 'red', len: 260, baseAngle: 2.5 },
-      { id: 'cors_invest', levelId: 'lvl4', type: 'investigation', title: '🟡 Investigation', label: 'Console Logs', content: 'Evaluation: evaluated response headers in console. Found missing headers when browser requests assets from Secure Tunnel Layer directly.', color: 'yellow', len: 350, baseAngle: 2.8 },
-      { id: 'cors_cause', levelId: 'lvl4', type: 'root_cause', title: '🟣 Root Cause', label: 'Bridge Lock', content: 'CORS Block Cause: Outbound DNS tunnels apply strict origin checks, preventing external domains from calling static directories.', color: 'purple', len: 440, baseAngle: 3.14 },
-      { id: 'cors_fix', levelId: 'lvl4', type: 'fix', title: '🟢 Fix Applied', label: 'Proxy Setup', content: 'Proxy Setup: Wrote FastAPI /proxy-image?url=... endpoint. Backend fetches tunnel assets server-to-server and pipes data.', color: 'green', len: 440, baseAngle: 3.5 },
-      { id: 'cors_val', levelId: 'lvl4', type: 'validation', title: '🔵 Validation', label: 'Success Test', content: 'Verification: Dispatched parallel client request lists. Stream routes returned valid binary frames instantly.', color: 'blue', len: 350, baseAngle: 3.8 },
-      { id: 'cors_res', levelId: 'lvl4', type: 'resolved', title: '✓ Resolved', label: 'Clean Pipeline', content: 'Resolved: Images render in Next.js grid without CORS exceptions or authorization lockouts.', color: 'green', len: 260, baseAngle: 4.1 },
+      // CORS Debugging Path (Left/Center Branch - Vertical flow)
+      { id: 'cors_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'CORS Errors', content: 'Gallery images fail to render in browser client, producing HTTP Access-Control header drop logs.', x: 2150, y: 600, color: 'red' },
+      { id: 'cors_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Console Logs', content: 'Evaluation: evaluated response headers in console. Found missing headers when browser requests assets from Secure Tunnel Layer directly.', x: 2150, y: 800, color: 'yellow' },
+      { id: 'cors_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Bridge Lock', content: 'CORS Block Cause: Outbound DNS tunnels apply strict origin checks, preventing external domains from calling static directories.', x: 2150, y: 1000, color: 'purple' },
+      { id: 'cors_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Proxy Setup', content: 'Proxy Setup: Wrote FastAPI /proxy-image?url=... endpoint. Backend fetches tunnel assets server-to-server and pipes data.', x: 2150, y: 1200, color: 'green' },
+      { id: 'cors_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Success Test', content: 'Verification: Dispatched parallel client request lists. Stream routes returned valid binary frames instantly.', x: 2150, y: 1400, color: 'blue' },
+      { id: 'cors_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Clean Pipeline', content: 'Resolved: Images render in Next.js grid without CORS exceptions or authorization lockouts.', x: 2150, y: 1600, color: 'green' },
 
-      { id: 'backend', levelId: 'lvl5', type: 'milestone', title: 'Milestone 05', category: 'Backend', label: 'Backend Development', content: 'Coding Uvicorn wrapper routes, setting CORS policies, input text moderation blocks, and email dispatchers.', color: 'purple', len: 230, baseAngle: 0 },
-      { id: 'database', levelId: 'lvl6', type: 'milestone', title: 'Milestone 06', category: 'Data', label: 'Database Integration', content: 'Linking PostgreSQL database pools, setting up credentials schemas, and history seed records tables.', color: 'yellow', len: 230, baseAngle: -1.57 },
+      // ROW 2: Winding Backbone Timeline (Right-to-Left)
+      { id: 'backend', type: 'milestone', step: '05', title: 'Backend Development', category: 'Backend', label: 'Backend Development', content: 'Coding Uvicorn wrapper routes, setting CORS policies, input text moderation blocks, and email dispatchers.', x: 1500, y: 1750, color: 'purple' },
+      { id: 'database', type: 'milestone', step: '06', title: 'Database Integration', category: 'Data', label: 'Database Integration', content: 'Linking PostgreSQL database pools, setting up credentials schemas, and history seed records tables.', x: 850, y: 1800, color: 'yellow' },
 
-      // DB Migration Debugging (Level 6, Right Orbit Fan)
-      { id: 'db_prob', levelId: 'lvl6', type: 'problem', title: '🔴 Problem', label: 'DB Schema Mismatch', content: 'Schema Mismatch: API server crashes during sign-up requests due to missing columns in production table indexes.', color: 'red', len: 260, baseAngle: -0.9 },
-      { id: 'db_invest', levelId: 'lvl6', type: 'investigation', title: '🟡 Investigation', label: 'CLI reflection', content: 'Check columns: Run database reflections in local CLI. Found that columns like is_active were not created on remote tables.', color: 'yellow', len: 350, baseAngle: -0.6 },
-      { id: 'db_cause', levelId: 'lvl6', type: 'root_cause', title: '🟣 Root Cause', label: 'Tables Out of Sync', content: 'Tables Out-of-Sync: Standard SQLAlchemy calls do not create missing columns on boot if tables are already created.', color: 'purple', len: 440, baseAngle: 0 },
-      { id: 'db_fix', levelId: 'lvl6', type: 'fix', title: '🟢 Fix Applied', label: 'Auto-Migrations', color: 'green', content: 'Auto-Migrations: Programmed a startup reflection hook that compares structures and runs raw ALTER TABLE commands.', len: 440, baseAngle: 0.3 },
-      { id: 'db_val', levelId: 'lvl6', type: 'validation', title: '🔵 Validation', label: 'Boot verify', content: 'Boot Verification: Restarted server deployments. Startup logs verified that columns were safely added.', color: 'blue', len: 350, baseAngle: 0.6 },
-      { id: 'db_res', levelId: 'lvl6', type: 'resolved', title: '✓ Resolved', label: 'Migrations Safe', content: 'Migrations Safe: Production database is auto-synchronized on boot without manual scripting operations.', color: 'green', len: 260, baseAngle: 0.9 },
+      // DB Migration Debugging Path (Right Branch - Vertical flow)
+      { id: 'db_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'DB Schema Mismatch', content: 'Schema Mismatch: API server crashes during sign-up requests due to missing columns in production table indexes.', x: 850, y: 2150, color: 'red' },
+      { id: 'db_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'CLI reflection', content: 'Check columns: Run database reflections in local CLI. Found that columns like is_active were not created on remote tables.', x: 850, y: 2350, color: 'yellow' },
+      { id: 'db_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Tables Out of Sync', content: 'Tables Out-of-Sync: Standard SQLAlchemy calls do not create missing columns on boot if tables are already created.', x: 850, y: 2550, color: 'purple' },
+      { id: 'db_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Auto-Migrations', content: 'Auto-Migrations: Programmed a startup reflection hook that compares structures and runs raw ALTER TABLE commands.', x: 850, y: 2750, color: 'green' },
+      { id: 'db_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Boot verify', content: 'Boot Verification: Restarted server deployments. Startup logs verified that columns were safely added.', x: 850, y: 2950, color: 'blue' },
+      { id: 'db_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Migrations Safe', content: 'Migrations Safe: Production database is auto-synchronized on boot without manual scripting operations.', x: 850, y: 3150, color: 'green' },
 
-      { id: 'auth', levelId: 'lvl7', type: 'milestone', title: 'Milestone 07', category: 'Security', label: 'Authentication', content: 'Coding signed JWT session keys, secure hash matches, and routing credentials check.', color: 'blue', len: 230, baseAngle: 1.57 },
+      // ROW 3: Winding Backbone Timeline (Left-to-Right)
+      { id: 'auth', type: 'milestone', step: '07', title: 'Authentication System', category: 'Security', label: 'Authentication System', content: 'Coding signed JWT session keys, secure hash matches, and routing credentials check.', x: 200, y: 3300, color: 'blue' },
 
-      // Auth Token Debugging (Level 7, Left Orbit Fan)
-      { id: 'auth_prob', levelId: 'lvl7', type: 'problem', title: '🔴 Problem', label: 'Auth Token Crash', content: 'Auth Crash: Users log in successfully but backend calls log credential errors, locking them out of the studio.', color: 'red', len: 260, baseAngle: 2.5 },
-      { id: 'auth_invest', levelId: 'lvl7', type: 'investigation', title: '🟡 Investigation', label: 'Cookie Audit', content: 'Check cookies: Reviewed authorization headers sent from client dashboard. Found cookie structure variations between domains.', color: 'yellow', len: 350, baseAngle: 2.8 },
-      { id: 'auth_cause', levelId: 'lvl7', type: 'root_cause', title: '🟣 Root Cause', label: 'Validation Mismatch', content: 'Validation Mismatch: JWT parser dropped header tokens due to inconsistent formatting checks in cookie keys.', color: 'purple', len: 440, baseAngle: 3.14 },
-      { id: 'auth_fix', levelId: 'lvl7', type: 'fix', title: '🟢 Fix Applied', label: 'Unified Cookie Check', content: 'Fix Logic: Unified cookie checks inside API router. Formatted auth state parsing to support cookie fallback variables.', color: 'green', len: 440, baseAngle: 3.5 },
-      { id: 'auth_val', levelId: 'lvl7', type: 'validation', title: '🔵 Validation', label: 'Access check', content: 'Access verification: Loaded canvas studio using test credentials. Requests validated successfully.', color: 'blue', len: 350, baseAngle: 3.8 },
-      { id: 'auth_res', levelId: 'lvl7', type: 'resolved', title: '✓ Resolved', label: 'Secure Sessions', content: 'Secure Sessions: JWT checks execute correctly on all protected studio endpoints.', color: 'green', len: 260, baseAngle: 4.1 },
+      // Auth Token Debugging Path (Left Branch - Vertical flow)
+      { id: 'auth_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Auth Token Crash', content: 'Auth Crash: Users log in successfully but backend calls log credential errors, locking them out of the studio.', x: 200, y: 3650, color: 'red' },
+      { id: 'auth_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Cookie Audit', content: 'Check cookies: Reviewed authorization headers sent from client dashboard. Found cookie structure variations between domains.', x: 200, y: 3850, color: 'yellow' },
+      { id: 'auth_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Validation Mismatch', content: 'Validation Mismatch: JWT parser dropped header tokens due to inconsistent formatting checks in cookie keys.', x: 200, y: 4050, color: 'purple' },
+      { id: 'auth_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Unified Cookie Check', content: 'Fix Logic: Unified cookie checks inside API router. Formatted auth state parsing to support cookie fallback variables.', x: 200, y: 4250, color: 'green' },
+      { id: 'auth_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Access check', content: 'Access verification: Loaded canvas studio using test credentials. Requests validated successfully.', x: 200, y: 4450, color: 'blue' },
+      { id: 'auth_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Secure Sessions', content: 'Secure Sessions: JWT checks execute correctly on all protected studio endpoints.', x: 200, y: 4650, color: 'green' },
 
-      { id: 'email', levelId: 'lvl8', type: 'milestone', title: 'Milestone 08', category: 'Verification', label: 'Email Verification', content: 'Setting up transactional SMTP server triggers to verify user registration.', color: 'green', len: 230, baseAngle: -1.57 },
+      // ROW 4: Winding Backbone Timeline (Right-to-Left)
+      { id: 'email', type: 'milestone', step: '08', title: 'Email Verification', category: 'Verification', label: 'Email Verification', content: 'Setting up transactional SMTP server triggers to verify user registration.', x: 850, y: 4800, color: 'green' },
 
-      // Email Dispatch Latency Debugging (Level 8, Right Orbit Fan)
-      { id: 'email_prob', levelId: 'lvl8', type: 'problem', title: '🔴 Problem', label: 'Signup Latency', content: 'Signup Latency: The signup flow hung or crashed during mail dispatch, locking user interface.', color: 'red', len: 260, baseAngle: -0.9 },
-      { id: 'email_invest', levelId: 'lvl8', type: 'investigation', title: '🟡 Investigation', label: 'Route Profiling', content: 'Profile routes: Tracked API processing times. Handshake connections with external SMTP ports took over 8 seconds.', color: 'yellow', len: 350, baseAngle: -0.6 },
-      { id: 'email_cause', levelId: 'lvl8', type: 'root_cause', title: '🟣 Root Cause', label: 'Synchronous SMTP', content: 'Synchronous Threads: Emails were dispatched synchronously in the primary request thread, stalling responses.', color: 'purple', len: 440, baseAngle: 0 },
-      { id: 'email_fix', levelId: 'lvl8', type: 'fix', title: '🟢 Fix Applied', label: 'Async Tasks', content: 'Async Tasks: Modified FastAPI routes to dispatch verification emails using a background task (BackgroundTasks).', color: 'green', len: 440, baseAngle: 0.3 },
-      { id: 'email_val', levelId: 'lvl8', type: 'validation', title: '🔵 Validation', label: 'Registration Test', content: 'Test register: Dispatched signup requests. Server returned immediately while SMTP task completed in parallel.', color: 'blue', len: 350, baseAngle: 0.6 },
-      { id: 'email_res', levelId: 'lvl8', type: 'resolved', title: '✓ Resolved', label: 'Signup Fast', content: 'Signup Fast: User creation takes <100ms, while emails dispatch concurrently in background threads.', color: 'green', len: 260, baseAngle: 0.9 },
+      // Email Latency Debugging Path (Right Branch - Vertical flow)
+      { id: 'email_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Signup Latency', content: 'Signup Latency: The signup flow hung or crashed during mail dispatch, locking user interface.', x: 850, y: 5150, color: 'red' },
+      { id: 'email_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Route Profiling', content: 'Profile routes: Tracked API processing times. Handshake connections with external SMTP ports took over 8 seconds.', x: 850, y: 5350, color: 'yellow' },
+      { id: 'email_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Synchronous SMTP', content: 'Synchronous Threads: Emails were dispatched synchronously in the primary request thread, stalling responses.', x: 850, y: 5550, color: 'purple' },
+      { id: 'email_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Async Tasks', content: 'Async Tasks: Modified FastAPI routes to dispatch verification emails using a background task (BackgroundTasks).', x: 850, y: 5750, color: 'green' },
+      { id: 'email_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Registration Test', content: 'Test register: Dispatched signup requests. Server returned immediately while SMTP task completed in parallel.', x: 850, y: 5950, color: 'blue' },
+      { id: 'email_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Signup Fast', content: 'Signup Fast: User creation takes <100ms, while emails dispatch concurrently in background threads.', x: 850, y: 6150, color: 'green' },
 
-      { id: 'credit', levelId: 'lvl9', type: 'milestone', title: 'Milestone 09', category: 'Billing', label: 'Credit System', content: 'Implementing balance checks and deducting credits dynamically before queue assignments.', color: 'yellow', len: 230, baseAngle: 1.57 },
+      // ROW 5: Winding Backbone Timeline (Left-to-Right)
+      { id: 'credit', type: 'milestone', step: '09', title: 'Credit System', category: 'Billing', label: 'Credit System', content: 'Implementing balance checks and deducting credits dynamically before queue assignments.', x: 1500, y: 6300, color: 'yellow' },
 
-      // Credit Balance Race Conditions Debugging (Level 9, Left Orbit Fan)
-      { id: 'credit_prob', levelId: 'lvl9', type: 'problem', title: '🔴 Problem', label: 'Credit Bypass', content: 'Credit Bypass: Users bypass credit bounds by triggering concurrent generations on multiple tabs.', color: 'red', len: 260, baseAngle: 2.5 },
-      { id: 'credit_invest', levelId: 'lvl9', type: 'investigation', title: '🟡 Investigation', label: 'Concurrency Test', content: 'Concurrent calls: Dispatched 5 simultaneous generation POST actions. User generated 5 images despite having 1 credit.', color: 'yellow', len: 350, baseAngle: 2.8 },
-      { id: 'credit_cause', levelId: 'lvl9', type: 'root_cause', title: '🟣 Root Cause', label: 'Async Gap', content: 'Async Gap: Credits checked at start but subtracted only after image finishes rendering, leaving a validation window.', color: 'purple', len: 440, baseAngle: 3.14 },
-      { id: 'credit_fix', levelId: 'lvl9', type: 'fix', title: '🟢 Fix Applied', label: 'Pre-Deduction', content: 'Pre-Deduction: Deduct credits first inside sql transaction block. If generation task aborts, execute balance refund.', color: 'green', len: 440, baseAngle: 3.5 },
-      { id: 'credit_val', levelId: 'lvl9', type: 'validation', title: '🔵 Validation', label: 'Race test check', content: 'Race check: Dispatched simultaneous generation queues again. DB locked, only first request processed.', color: 'blue', len: 350, baseAngle: 3.8 },
-      { id: 'credit_res', levelId: 'lvl9', type: 'resolved', title: '✓ Resolved', label: 'Credit Lock', content: 'Credit Lock: Credit verification locks database row immediately on submission, preventing concurrency leaks.', color: 'green', len: 260, baseAngle: 4.1 },
+      // Credit Race Debugging Path (Left Branch - Vertical flow)
+      { id: 'credit_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Credit Bypass', content: 'Credit Bypass: Users bypass credit bounds by triggering concurrent generations on multiple tabs.', x: 1500, y: 6650, color: 'red' },
+      { id: 'credit_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Concurrency Test', content: 'Concurrent calls: Dispatched 5 simultaneous generation POST actions. User generated 5 images despite having 1 credit.', x: 1500, y: 6850, color: 'yellow' },
+      { id: 'credit_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Async Gap', content: 'Async Gap: Credits checked at start but subtracted only after image finishes rendering, leaving a validation window.', x: 1500, y: 7050, color: 'purple' },
+      { id: 'credit_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Pre-Deduction', content: 'Pre-Deduction: Deduct credits first inside sql transaction block. If generation task aborts, execute balance refund.', x: 1500, y: 7250, color: 'green' },
+      { id: 'credit_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Race test check', content: 'Race check: Dispatched simultaneous generation queues again. DB locked, only first request processed.', x: 1500, y: 7450, color: 'blue' },
+      { id: 'credit_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Credit Lock', content: 'Credit Lock: Credit verification locks database row immediately on submission, preventing concurrency leaks.', x: 1500, y: 7650, color: 'green' },
 
-      { id: 'ai_infra', levelId: 'lvl10', type: 'milestone', title: 'Milestone 10', category: 'AI Engine', label: 'AI Generation Infrastructure', content: 'Connecting local AI Inference Engine nodes. Parsing workflow JSON parameters and seeds.', color: 'pink', len: 230, baseAngle: 0 },
-      { id: 'deploy', levelId: 'lvl11', type: 'milestone', title: 'Milestone 11', category: 'Deploy', label: 'Cloud Deployment', content: 'Releasing Next.js app to Vercel and backend services API to Render instances.', color: 'purple', len: 230, baseAngle: -1.57 },
+      // ROW 6: Winding Backbone Timeline (Right-to-Left)
+      { id: 'ai_infra', type: 'milestone', step: '10', title: 'AI Generation Infrastructure', category: 'AI Engine', label: 'AI Generation Infrastructure', content: 'Connecting local AI Inference Engine nodes. Parsing workflow JSON parameters and seeds.', x: 2150, y: 7800, color: 'pink' },
+      { id: 'deploy', type: 'milestone', step: '11', title: 'Cloud Deployment', category: 'Deploy', label: 'Cloud Deployment', content: 'Releasing Next.js app to Vercel and backend services API to Render instances.', x: 1500, y: 7850, color: 'purple' },
 
-      // Ephemeral Disk Wipes Debugging (Level 11, Right Orbit Fan)
-      { id: 'disk_prob', levelId: 'lvl11', type: 'problem', title: '🔴 Problem', label: 'Images Wiped', content: 'Images Wiped: Previously generated cached images suddenly fail to load after a few hours of backend scale-downs.', color: 'red', len: 260, baseAngle: -0.9 },
-      { id: 'disk_invest', levelId: 'lvl11', type: 'investigation', title: '🟡 Investigation', label: 'Disk Inspection', content: 'Check disk: Inspected folder sizes inside Render container filesystem. Directory was empty after scale-down sleep states.', color: 'yellow', len: 350, baseAngle: -0.6 },
-      { id: 'disk_cause', levelId: 'lvl11', type: 'root_cause', title: '🟣 Root Cause', label: 'Ephemeral Disks', content: 'Ephemeral Disks: Cloud containers run stateless containers that clear local caches upon environment scale-down/redeployments.', color: 'purple', len: 440, baseAngle: 0 },
-      { id: 'disk_fix', levelId: 'lvl11', type: 'fix', title: '🟢 Fix Applied', label: 'Self-Healing Fallback', content: 'Fallback Logic: Wrote proxy checks that automatically fetch missing WebP files from GPU node on-the-fly and refresh disk.', color: 'green', len: 440, baseAngle: 0.3 },
-      { id: 'disk_val', levelId: 'lvl11', type: 'validation', title: '🔵 Validation', label: 'Simulate Wipe', content: 'Simulate Wipes: Wiped cache folder manually and requested image via proxy stream. Proxy successfully rebuilt WebP.', color: 'blue', len: 350, baseAngle: 0.6 },
-      { id: 'disk_res', levelId: 'lvl11', type: 'resolved', title: '✓ Resolved', label: 'Self-healing Active', content: 'Self-healing: Wiped container disk is transparent to user; proxy rebuilds dynamic local caches silently.', color: 'green', len: 260, baseAngle: 0.9 },
+      // Ephemeral Disk Debugging Path (Right Branch - Vertical flow)
+      { id: 'disk_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Images Wiped', content: 'Images Wiped: Previously generated cached images suddenly fail to load after a few hours of backend scale-downs.', x: 1500, y: 8200, color: 'red' },
+      { id: 'disk_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Disk Inspection', content: 'Check disk: Inspected folder sizes inside Render container filesystem. Directory was empty after scale-down sleep states.', x: 1500, y: 8400, color: 'yellow' },
+      { id: 'disk_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Ephemeral Disks', content: 'Ephemeral Disks: Cloud containers run stateless containers that clear local caches upon environment scale-down/redeployments.', x: 1500, y: 8600, color: 'purple' },
+      { id: 'disk_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Self-Healing Fallback', content: 'Fallback Logic: Wrote proxy checks that automatically fetch missing WebP files from GPU node on-the-fly and refresh disk.', x: 1500, y: 8800, color: 'green' },
+      { id: 'disk_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Simulate Wipe', content: 'Simulate Wipes: Wiped cache folder manually and requested image via proxy stream. Proxy successfully rebuilt WebP.', x: 1500, y: 9000, color: 'blue' },
+      { id: 'disk_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Self-healing Active', content: 'Self-healing: Wiped container disk is transparent to user; proxy rebuilds dynamic local caches silently.', x: 1500, y: 9200, color: 'green' },
 
-      { id: 'test', levelId: 'lvl12', type: 'milestone', title: 'Milestone 12', category: 'QA', label: 'Testing Phase', content: 'Stress-testing token verification queues, concurrent image renders, and database performance pools.', color: 'blue', len: 230, baseAngle: 0 },
-      { id: 'bugs', levelId: 'lvl13', type: 'milestone', title: 'Milestone 13', category: 'Hotfixes', label: 'Bug Fixes Stage', content: 'Restricting direct image loads from tunnels to protect asset endpoints from hotlinking.', color: 'yellow', len: 230, baseAngle: 1.57 },
+      // ROW 7: Winding Backbone Timeline (Left-to-Right)
+      { id: 'test', type: 'milestone', step: '12', title: 'Testing Phase', category: 'QA', label: 'Testing Phase', content: 'Stress-testing token verification queues, concurrent image renders, and database performance pools.', x: 850, y: 9350, color: 'blue' },
+      { id: 'bugs', type: 'milestone', step: '13', title: 'Bug Fixes Stage', category: 'Hotfixes', label: 'Bug Fixes Stage', content: 'Restricting direct image loads from tunnels to protect asset endpoints from hotlinking.', x: 200, y: 9400, color: 'yellow' },
 
-      // Tunnel Disconnects Debugging (Level 13, Left Orbit Fan)
-      { id: 'tunnel_prob', levelId: 'lvl13', type: 'problem', title: '🔴 Problem', label: 'Tunnel Dropped', content: 'Tunnel Dropped: Image generations fail with HTTP Connection Timeout logs after 24 hours of execution.', color: 'red', len: 260, baseAngle: 2.5 },
-      { id: 'tunnel_invest', levelId: 'lvl13', type: 'investigation', title: '🟡 Investigation', label: 'Monitor Status', content: 'Check Tunnel Status: Monitored dynamic bridge tunnel sockets over 48 hours. Socket disconnected exactly after 24h.', color: 'yellow', len: 350, baseAngle: 2.8 },
-      { id: 'tunnel_cause', levelId: 'lvl13', type: 'root_cause', title: '🟣 Root Cause', label: 'Uptime Limit', content: 'Quick Tunnel Limits: Free DNS tunnel allocation expires after 24h, requiring new socket handshakes and hostnames.', color: 'purple', len: 440, baseAngle: 3.14 },
-      { id: 'tunnel_fix', levelId: 'lvl13', type: 'fix', title: '🟢 Fix Applied', label: 'Error Diagnostics', content: 'Error Catching: Programmed tunnel diagnostics checks. Configured custom named tunnel configurations guides.', color: 'green', len: 440, baseAngle: 3.5 },
-      { id: 'tunnel_val', levelId: 'lvl13', type: 'validation', title: '🔵 Validation', label: 'Uptime restore test', content: 'Uptime test: Restarted bridge tunnel and verified that backend auto-restored operations upon tunnel re-establishment.', color: 'blue', len: 350, baseAngle: 3.8 },
-      { id: 'tunnel_res', levelId: 'lvl13', type: 'resolved', title: '✓ Resolved', label: 'Monitoring Active', content: 'Monitoring Active: Logging alert routes alert the server operator to restart the tunnel when a bridge connection drops.', color: 'green', len: 260, baseAngle: 4.1 },
+      // Tunnel Disconnect Debugging Path (Left Branch - Vertical flow)
+      { id: 'tunnel_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Tunnel Dropped', content: 'Tunnel Dropped: Image generations fail with HTTP Connection Timeout logs after 24 hours of execution.', x: 200, y: 9750, color: 'red' },
+      { id: 'tunnel_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Monitor Status', content: 'Check Tunnel Status: Monitored dynamic bridge tunnel sockets over 48 hours. Socket disconnected exactly after 24h.', x: 200, y: 9950, color: 'yellow' },
+      { id: 'tunnel_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Uptime Limit', content: 'Quick Tunnel Limits: Free DNS tunnel allocation expires after 24h, requiring new socket handshakes and hostnames.', x: 200, y: 10150, color: 'purple' },
+      { id: 'tunnel_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Error Diagnostics', content: 'Error Catching: Programmed tunnel diagnostics checks. Configured custom named tunnel configurations guides.', x: 200, y: 10350, color: 'green' },
+      { id: 'tunnel_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Uptime restore test', content: 'Uptime test: Restarted bridge tunnel and verified that backend auto-restored operations upon tunnel re-establishment.', x: 200, y: 10550, color: 'blue' },
+      { id: 'tunnel_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Monitoring Active', content: 'Monitoring Active: Logging alert routes alert the server operator to restart the tunnel when a bridge connection drops.', x: 200, y: 10750, color: 'green' },
 
-      { id: 'opt', levelId: 'lvl14', type: 'milestone', title: 'Milestone 14', category: 'Perf', label: 'Optimization Phase', content: 'Converting raw output PNG graphics to 85% WebP files asynchronously in parallel caching tasks.', color: 'green', len: 230, baseAngle: 0 },
-      { id: 'live', levelId: 'lvl15', type: 'milestone', title: 'Milestone 15', category: 'Live', label: 'Current Live State', content: 'Antrix AI V2 is Stable & Live: The final production-ready state with all bugs resolved, optimization complete, and active monitoring.', color: 'green', len: 230, baseAngle: 0.5 }
+      // ROW 8: Winding Backbone Timeline (Right-to-Left)
+      { id: 'opt', type: 'milestone', step: '14', title: 'Optimization Phase', category: 'Perf', label: 'Optimization Phase', content: 'Converting raw output PNG graphics to 85% WebP files asynchronously in parallel caching tasks.', x: 850, y: 10900, color: 'green' },
+      { id: 'live', type: 'milestone', step: '15', title: 'Current Live Version', category: 'Live', label: 'Current Live State', content: 'Antrix AI V2 is Stable & Live: The final production-ready state with all bugs resolved, optimization complete, and active monitoring.', x: 1500, y: 10950, color: 'green' },
+
+      // ROADMAP BRANCHES (Branching off Live node)
+      { id: 'rm_infra', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'Better Infrastructure', content: 'Upgrade named tunnels to dedicated private subnets. Integrate automatic multi-region server replication.', x: 2150, y: 10700, color: 'purple' },
+      { id: 'rm_speed', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'Faster Generation', content: 'Compile custom TensorRT models on inference worker nodes. Target <1.5s rendering speed.', x: 2150, y: 10820, color: 'purple' },
+      { id: 'rm_users', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'Advanced User Features', content: 'Canvas canvas layer sharing, project teams, multi-agent workspaces, and seed-controlled style lock.', x: 2150, y: 10940, color: 'purple' },
+      { id: 'rm_video', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'AI Video Generation', content: 'Integrate text-to-video and image-to-video nodes. Queue video renders to GPU clusters.', x: 2150, y: 11060, color: 'purple' },
+      { id: 'rm_assist', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'AI Assistant Ecosystem', content: 'Voice prompts, automatic canvas helpers, and smart upscale templates.', x: 2150, y: 11180, color: 'purple' },
+      { id: 'rm_enter', type: 'roadmap', step: 'RM', title: 'Future Roadmap', label: 'Enterprise Platform', content: 'Multi-node server load balancing, custom models upload, and enterprise API access key management.', x: 2150, y: 11300, color: 'purple' }
     ];
 
-    // Static Sticky Notes Data (Orbiting as separate pins)
+    // Connection definitions linking presentation nodes
+    const connections = [
+      { from: 'idea', fromDock: 'right', to: 'research', toDock: 'left', type: 'backbone' },
+      { from: 'research', fromDock: 'right', to: 'arch', toDock: 'left', type: 'backbone' },
+      { from: 'arch', fromDock: 'right', to: 'frontend', toDock: 'left', type: 'backbone' },
+      
+      // CORS Branch
+      { from: 'frontend', fromDock: 'bottom', to: 'cors_prob', toDock: 'top', type: 'branch' },
+      { from: 'cors_prob', fromDock: 'bottom', to: 'cors_invest', toDock: 'top', type: 'debug' },
+      { from: 'cors_invest', fromDock: 'bottom', to: 'cors_cause', toDock: 'top', type: 'debug' },
+      { from: 'cors_cause', fromDock: 'bottom', to: 'cors_fix', toDock: 'top', type: 'debug' },
+      { from: 'cors_fix', fromDock: 'bottom', to: 'cors_val', toDock: 'top', type: 'debug' },
+      { from: 'cors_val', fromDock: 'bottom', to: 'cors_res', toDock: 'top', type: 'debug' },
+      { from: 'cors_res', fromDock: 'left', to: 'backend', toDock: 'right', type: 'branch' },
+
+      { from: 'backend', fromDock: 'left', to: 'database', toDock: 'right', type: 'backbone' },
+
+      // DB Migration Branch
+      { from: 'database', fromDock: 'bottom', to: 'db_prob', toDock: 'top', type: 'branch' },
+      { from: 'db_prob', fromDock: 'bottom', to: 'db_invest', toDock: 'top', type: 'debug' },
+      { from: 'db_invest', fromDock: 'bottom', to: 'db_cause', toDock: 'top', type: 'debug' },
+      { from: 'db_cause', fromDock: 'bottom', to: 'db_fix', toDock: 'top', type: 'debug' },
+      { from: 'db_fix', fromDock: 'bottom', to: 'db_val', toDock: 'top', type: 'debug' },
+      { from: 'db_val', fromDock: 'bottom', to: 'db_res', toDock: 'top', type: 'debug' },
+      { from: 'db_res', fromDock: 'left', to: 'auth', toDock: 'right', type: 'branch' },
+
+      { from: 'auth', fromDock: 'bottom', to: 'auth_prob', toDock: 'top', type: 'branch' },
+      { from: 'auth_prob', fromDock: 'bottom', to: 'auth_invest', toDock: 'top', type: 'debug' },
+      { from: 'auth_invest', fromDock: 'bottom', to: 'auth_cause', toDock: 'top', type: 'debug' },
+      { from: 'auth_cause', fromDock: 'bottom', to: 'auth_fix', toDock: 'top', type: 'debug' },
+      { from: 'auth_fix', fromDock: 'bottom', to: 'auth_val', toDock: 'top', type: 'debug' },
+      { from: 'auth_val', fromDock: 'bottom', to: 'auth_res', toDock: 'top', type: 'debug' },
+      { from: 'auth_res', fromDock: 'right', to: 'email', toDock: 'left', type: 'branch' },
+
+      // Email Dispatch Latency Branch
+      { from: 'email', fromDock: 'bottom', to: 'email_prob', toDock: 'top', type: 'branch' },
+      { from: 'email_prob', fromDock: 'bottom', to: 'email_invest', toDock: 'top', type: 'debug' },
+      { from: 'email_invest', fromDock: 'bottom', to: 'email_cause', toDock: 'top', type: 'debug' },
+      { from: 'email_cause', fromDock: 'bottom', to: 'email_fix', toDock: 'top', type: 'debug' },
+      { from: 'email_fix', fromDock: 'bottom', to: 'email_val', toDock: 'top', type: 'debug' },
+      { from: 'email_val', fromDock: 'bottom', to: 'email_res', toDock: 'top', type: 'debug' },
+      { from: 'email_res', fromDock: 'right', to: 'credit', toDock: 'left', type: 'branch' },
+
+      // Credit Balance Race Conditions Branch
+      { from: 'credit', fromDock: 'bottom', to: 'credit_prob', toDock: 'top', type: 'branch' },
+      { from: 'credit_prob', fromDock: 'bottom', to: 'credit_invest', toDock: 'top', type: 'debug' },
+      { from: 'credit_invest', fromDock: 'bottom', to: 'credit_cause', toDock: 'top', type: 'debug' },
+      { from: 'credit_cause', fromDock: 'bottom', to: 'credit_fix', toDock: 'top', type: 'debug' },
+      { from: 'credit_fix', fromDock: 'bottom', to: 'credit_val', toDock: 'top', type: 'debug' },
+      { from: 'credit_val', fromDock: 'bottom', to: 'credit_res', toDock: 'top', type: 'debug' },
+      { from: 'credit_res', fromDock: 'right', to: 'ai_infra', toDock: 'left', type: 'branch' },
+
+      { from: 'ai_infra', fromDock: 'left', to: 'deploy', toDock: 'right', type: 'backbone' },
+
+      // Ephemeral Disk Wipes Branch
+      { from: 'deploy', fromDock: 'bottom', to: 'disk_prob', toDock: 'top', type: 'branch' },
+      { from: 'disk_prob', fromDock: 'bottom', to: 'disk_invest', toDock: 'top', type: 'debug' },
+      { from: 'disk_invest', fromDock: 'bottom', to: 'disk_cause', toDock: 'top', type: 'debug' },
+      { from: 'disk_cause', fromDock: 'bottom', to: 'disk_fix', toDock: 'top', type: 'debug' },
+      { from: 'disk_fix', fromDock: 'bottom', to: 'disk_val', toDock: 'top', type: 'debug' },
+      { from: 'disk_val', fromDock: 'bottom', to: 'disk_res', toDock: 'top', type: 'debug' },
+      { from: 'disk_res', fromDock: 'left', to: 'test', toDock: 'right', type: 'branch' },
+
+      { from: 'test', fromDock: 'left', to: 'bugs', toDock: 'right', type: 'backbone' },
+
+      // Tunnel Disconnects Branch
+      { from: 'bugs', fromDock: 'bottom', to: 'tunnel_prob', toDock: 'top', type: 'branch' },
+      { from: 'tunnel_prob', fromDock: 'bottom', to: 'tunnel_invest', toDock: 'top', type: 'debug' },
+      { from: 'tunnel_invest', fromDock: 'bottom', to: 'tunnel_cause', toDock: 'top', type: 'debug' },
+      { from: 'tunnel_cause', fromDock: 'bottom', to: 'tunnel_fix', toDock: 'top', type: 'debug' },
+      { from: 'tunnel_fix', fromDock: 'bottom', to: 'tunnel_val', toDock: 'top', type: 'debug' },
+      { from: 'tunnel_val', fromDock: 'bottom', to: 'tunnel_res', toDock: 'top', type: 'debug' },
+      { from: 'tunnel_res', fromDock: 'right', to: 'opt', toDock: 'left', type: 'branch' },
+
+      { from: 'opt', fromDock: 'bottom', to: 'live', toDock: 'top', type: 'backbone' },
+
+      // Roadmap fan
+      { from: 'live', fromDock: 'right', to: 'rm_infra', toDock: 'left', type: 'roadmap' },
+      { from: 'live', fromDock: 'right', to: 'rm_speed', toDock: 'left', type: 'roadmap' },
+      { from: 'live', fromDock: 'right', to: 'rm_users', toDock: 'left', type: 'roadmap' },
+      { from: 'live', fromDock: 'right', to: 'rm_video', toDock: 'left', type: 'roadmap' },
+      { from: 'live', fromDock: 'right', to: 'rm_assist', toDock: 'left', type: 'roadmap' },
+      { from: 'live', fromDock: 'right', to: 'rm_enter', toDock: 'left', type: 'roadmap' }
+    ];
+
+    // Sticky Notes (Attached to specific coordinates near slides)
     const stickies = [
-      { id: 'sticky_1', levelId: 'lvl1', color: 'yellow', text: "Let's make sure the client NEVER gets the raw bridge tunnel URL directly. Route everything through an API proxy!", author: 'Founder Note', rot: -3, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_2', levelId: 'lvl3', color: 'blue', text: "Spent hours debugging API routing! Browsers block cross-origin calls to dynamic tunnel endpoints.", author: 'PM log', rot: 4, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_3', levelId: 'lvl5', color: 'pink', text: "Database migration mismatch discovered! We need automatic schema migrations running inside the application boot process.", author: 'PM log', rot: -2, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_4', levelId: 'lvl8', color: 'yellow', text: "Authentication failed because token validation logic was incorrect! Token validation dropped requests due to format variations.", author: 'Engineer Log', rot: 3, len: 240, baseAngle: 1.57 },
-      { id: 'sticky_5', levelId: 'lvl10', color: 'blue', text: "Email delivery investigation: SMTP handshakes take too long, blocking user registration threads. We need background workers!", author: 'Engineer Log', rot: -4, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_6', levelId: 'lvl12', color: 'pink', text: "Race condition allowed over-generation! Check-before-deduct creates window of credit evasion. Deduct immediately on start.", author: 'Engineer Note', rot: 3, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_7', levelId: 'lvl14', color: 'yellow', text: "Deployment environment mismatch & wipes! Render instance wipes directory on restarts. We must fall back to remote fetch if empty.", author: 'Founder Note', rot: -2, len: 240, baseAngle: 3.14 },
-      { id: 'sticky_8', levelId: 'lvl15', color: 'blue', text: "Tunnel disconnected after 24h: Free tunnel allocation has uptime bounds. We need error locks and named tunnels.", author: 'PM Note', rot: 3, len: 240, baseAngle: -2.3 }
+      { id: 'sticky_1', color: 'yellow', text: "Let's make sure the client NEVER gets the raw bridge tunnel URL directly. Route everything through an API proxy!", x: 500, y: 450, author: 'Founder Note', rot: -3 },
+      { id: 'sticky_2', color: 'blue', text: "Spent hours debugging API routing! Browsers block cross-origin calls to dynamic tunnel endpoints.", x: 2450, y: 700, author: 'PM log', rot: 4 },
+      { id: 'sticky_3', color: 'pink', text: "Database migration mismatch discovered! We need automatic schema migrations running inside the application boot process.", x: 500, y: 2200, author: 'PM log', rot: -2 },
+      { id: 'sticky_4', color: 'yellow', text: "Authentication failed because token validation logic was incorrect! Token validation dropped requests due to format variations.", x: 500, y: 3450, author: 'Engineer Log', rot: 3 },
+      { id: 'sticky_5', color: 'blue', text: "Email delivery investigation: SMTP handshakes take too long, blocking user registration threads. We need background workers!", x: 1200, y: 4950, author: 'Engineer Log', rot: -4 },
+      { id: 'sticky_6', color: 'pink', text: "Race condition allowed over-generation! Check-before-deduct creates window of credit evasion. Deduct immediately on start.", x: 1200, y: 6450, author: 'Engineer Note', rot: 3 },
+      { id: 'sticky_7', color: 'yellow', text: "Deployment environment mismatch & wipes! Render instance wipes directory on restarts. We must fall back to remote fetch if empty.", x: 1200, y: 8000, author: 'Founder Note', rot: -2 },
+      { id: 'sticky_8', color: 'blue', text: "Tunnel disconnected after 24h: Free tunnel allocation has uptime bounds. We need error locks and named tunnels.", x: 500, y: 9550, author: 'PM Note', rot: 3 },
+      
+      // Side notes requested as examples
+      { id: 'sticky_example_1', color: 'green', text: "Authentication finally stabilized", x: 740, y: 3220, author: 'Discovery', rot: -2 },
+      { id: 'sticky_example_2', color: 'yellow', text: "Deployment issue traced to environment mismatch", x: 2020, y: 7720, author: 'Lessons Learned', rot: 4 },
+      { id: 'sticky_example_3', color: 'pink', text: "Database migration unexpectedly failed", x: 1380, y: 1720, author: 'Observation', rot: -3 },
+      { id: 'sticky_example_4', color: 'blue', text: "Email verification flow required multiple iterations", x: 1380, y: 4720, author: 'Discovery', rot: 2 },
+      { id: 'sticky_example_5', color: 'green', text: "Production routing bug resolved", x: 740, y: 9280, author: 'Founder Note', rot: -1 }
     ];
 
-    // Global Interaction State
+    // Polaroids
+    const polaroids = [
+      { id: 'polaroid-1', x: 2150, y: 50 },
+      { id: 'polaroid-2', x: 200, y: 1250 },
+      { id: 'polaroid-3', x: 1450, y: 4350 },
+      { id: 'polaroid-4', x: 200, y: 9200 }
+    ];
+
+    // Sketches
+    const sketches = [
+      { id: 'sketch-arch', x: 150, y: 540 },
+      { id: 'sketch-db', x: 1450, y: 2200 },
+      { id: 'sketch-pipeline', x: 150, y: 7000 }
+    ];
+
+    // Global Interactive Panning/Drawing State
     let scale = 1;
     let translateX = 0;
     let translateY = 0;
@@ -1210,7 +1305,7 @@
     let isDrawing = false;
     let currentDrawingPath = null;
     
-    // Drag and drop physics-orbit state
+    // Drag-and-drop state
     let activeDragEl = null;
     let dragStartX = 0, dragStartY = 0;
     let dragOffsetLeft = 0, dragOffsetTop = 0;
@@ -1225,70 +1320,28 @@
 
     // Initialize Layout & Dynamic Content
     window.addEventListener("load", () => {
-      buildLevelPinsMap();
-      renderLevelWheels();
       renderNodes();
-      renderStickies();
+      drawConnections();
       buildJumpPanel();
       setupDraggables();
       setupDrawingEvents();
-      centerOnLevel('lvl1');
+      centerOnNode('idea');
       updateMinimap();
       startCollaboratorSim();
-      
-      // Start aa Levels Rotation Rendering Loop
-      requestAnimationFrame(aaRotationLoop);
     });
 
-    // Build references from level centers to orbiting items
-    function buildLevelPinsMap() {
-      levels.forEach(level => {
-        level.pins = [];
-      });
-
-      pins.forEach(pin => {
-        const level = levels.find(l => l.id === pin.levelId);
-        if (level) {
-          level.pins.push(pin);
-        }
-      });
-
-      stickies.forEach(st => {
-        const level = levels.find(l => l.id === st.levelId);
-        if (level) {
-          level.pins.push(st);
-        }
-      });
-    }
-
-    // Render aa Center Wheels
-    function renderLevelWheels() {
-      levels.forEach(level => {
-        const wheel = document.createElement("div");
-        wheel.className = "aa-wheel";
-        wheel.id = level.id;
-        wheel.style.left = `${level.x - 45}px`;
-        wheel.style.top = `${level.y - 45}px`;
-
-        wheel.innerHTML = `
-          <span class="aa-wheel-inner">${level.name}</span>
-          <span class="aa-wheel-label">${level.label}</span>
-        `;
-        canvas.appendChild(wheel);
-      });
-    }
-
-    // Render Milestone Cards
+    // Render Milestone & Debug presentation slide cards
     function renderNodes() {
-      pins.forEach(node => {
+      nodes.forEach(node => {
         const card = document.createElement("div");
-        card.className = `node-card draggable-node color-${node.color}`;
+        card.className = `node-card draggable-node color-${node.color} ${node.type}`;
         card.id = node.id;
-        card.style.left = `0px`;
-        card.style.top = `0px`;
+        card.style.left = `${node.x}px`;
+        card.style.top = `${node.y}px`;
 
         let typePill = node.type;
-        if (node.type === 'milestone') typePill = node.category;
+        if (node.type === 'milestone') typePill = `${node.step} / 15 — ${node.category}`;
+        if (node.type === 'roadmap') typePill = 'Roadmap';
 
         let iconSvg = '';
         if (node.type === 'problem') {
@@ -1318,241 +1371,172 @@
       });
     }
 
-    // Render Sticky Notes
-    function renderStickies() {
-      stickies.forEach(sticky => {
-        const stickyEl = document.createElement("div");
-        stickyEl.className = `sticky-note sticky-${sticky.color} draggable-sticky`;
-        stickyEl.id = sticky.id;
-        stickyEl.style.left = `0px`;
-        stickyEl.style.top = `0px`;
-        stickyEl.style.transform = `rotate(${sticky.rot || 0}deg)`;
-
-        stickyEl.innerHTML = `
-          <div class="sticky-note-bg"></div>
-          <div class="sticky-note-content">
-            <div class="sticky-text" contenteditable="true" onblur="updateStickyText('${sticky.id}', this.innerText)">${sticky.text}</div>
-            <div class="sticky-footer">— ${sticky.author || 'Notes'}</div>
-          </div>
-        `;
-        canvas.appendChild(stickyEl);
-      });
-    }
-
-    function updateStickyText(id, text) {
-      const stick = stickies.find(s => s.id === id);
-      if (stick) stick.text = text;
-    }
-
-    // aa Levels Rotation Physics loop
-    function aaRotationLoop() {
-      // Clear previous connections
+    // Dynamic Connections Drawer using Bezier Curves and n8n workflow styles
+    function drawConnections() {
+      // Clear existing paths except markers
       const existingPaths = svgConnections.querySelectorAll(".connection-line, .arrowhead");
       existingPaths.forEach(p => p.remove());
 
-      // 1. Draw Backbone timeline wire linking level select nodes
-      for (let i = 0; i < levels.length - 1; i++) {
-        const l1 = levels[i];
-        const l2 = levels[i + 1];
-        
+      connections.forEach(conn => {
+        const fromEl = document.getElementById(conn.from);
+        const toEl = document.getElementById(conn.to);
+        if (!fromEl || !toEl) return;
+
+        const fromX = parseFloat(fromEl.style.left);
+        const fromY = parseFloat(fromEl.style.top);
+        const fromW = fromEl.offsetWidth;
+        const fromH = fromEl.offsetHeight;
+
+        const toX = parseFloat(toEl.style.left);
+        const toY = parseFloat(toEl.style.top);
+        const toW = toEl.offsetWidth;
+        const toH = toEl.offsetHeight;
+
+        let p1 = getDockPoint(fromX, fromY, fromW, fromH, conn.fromDock);
+        let p2 = getDockPoint(toX, toY, toW, toH, conn.toDock);
+
+        // Compute curved bezier path
         let pathD = '';
-        let ctrlY1 = l1.y + (l2.y - l1.y) * 0.4;
-        let ctrlY2 = l2.y - (l2.y - l1.y) * 0.4;
-        pathD = `M ${l1.x} ${l1.y} C ${l1.x} ${ctrlY1}, ${l2.x} ${ctrlY2}, ${l2.x} ${l2.y}`;
+        let strokeColor = '#0F172A';
+        let strokeStyle = 'solid';
+        let strokeW = 2.5;
 
-        const backbonePath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        backbonePath.setAttribute("d", pathD);
-        backbonePath.setAttribute("class", "connection-line");
-        backbonePath.setAttribute("stroke", "#475569");
-        backbonePath.setAttribute("stroke-width", "5");
-        backbonePath.setAttribute("stroke-dasharray", "10, 8");
-        svgConnections.appendChild(backbonePath);
-      }
+        if (conn.type === 'backbone') {
+          // Thick timeline connector wire
+          strokeColor = '#475569';
+          strokeW = 3.5;
+          let ctrlX1 = p1.x + (conn.fromDock === 'right' ? 150 : -150);
+          let ctrlX2 = p2.x + (conn.toDock === 'right' ? 150 : -150);
+          pathD = `M ${p1.x} ${p1.y} C ${ctrlX1} ${p1.y}, ${ctrlX2} ${p2.y}, ${p2.x} ${p2.y}`;
+        } else if (conn.type === 'branch') {
+          // Dotted lateral debug path branches
+          strokeColor = '#94A3B8';
+          strokeStyle = 'dashed';
+          strokeW = 2.5;
+          let ctrlY1 = p1.y + 100;
+          let ctrlX2 = p2.x;
+          pathD = `M ${p1.x} ${p1.y} C ${p1.x} ${ctrlY1}, ${ctrlX2} ${p2.y - 100}, ${p2.x} ${p2.y}`;
+        } else if (conn.type === 'roadmap') {
+          // Roadmap branching paths
+          strokeColor = '#8B5CF6';
+          strokeW = 2.5;
+          let ctrlX1 = p1.x + 100;
+          let ctrlX2 = p2.x - 100;
+          pathD = `M ${p1.x} ${p1.y} C ${ctrlX1} ${p1.y}, ${ctrlX2} ${p2.y}, ${p2.x} ${p2.y}`;
+        } else {
+          // Debugging flows: Color-coded lines based on problem solving status
+          strokeColor = '#EF4444'; // Problem (Red)
+          if (conn.from.includes('invest')) strokeColor = '#F59E0B'; // Investigation (Yellow)
+          if (conn.from.includes('cause')) strokeColor = '#7C3AED'; // Root Cause (Purple)
+          if (conn.from.includes('fix')) strokeColor = '#10B981'; // Solution (Green)
+          if (conn.from.includes('val')) strokeColor = '#2563EB'; // Outcome (Blue)
+          if (conn.from.includes('res')) strokeColor = '#059669'; // Final Resolved (Green)
 
-      // 2. Rotate Level centers and reposition orbiting pins
-      levels.forEach(level => {
-        // Spin wheels
-        level.angle += level.speed;
-
-        // Position wheel DOM
-        const wheelEl = document.getElementById(level.id);
-        if (wheelEl) {
-          wheelEl.style.left = `${level.x - 45}px`;
-          wheelEl.style.top = `${level.y - 45}px`;
+          let ctrlY1 = p1.y + 80;
+          let ctrlY2 = p2.y - 80;
+          pathD = `M ${p1.x} ${p1.y} C ${p1.x} ${ctrlY1}, ${p2.x} ${ctrlY2}, ${p2.x} ${p2.y}`;
         }
 
-        // Orbit pins
-        level.pins.forEach(pin => {
-          const cardEl = document.getElementById(pin.id);
-          if (!cardEl) return;
-
-          const currentAngle = pin.baseAngle + level.angle;
-          const px = level.x + pin.len * Math.cos(currentAngle);
-          const py = level.y + pin.len * Math.sin(currentAngle);
-
-          // Center the card on the calculated radial orbit endpoint
-          const cardW = cardEl.offsetWidth || 320;
-          const cardH = cardEl.offsetHeight || 110;
-
-          cardEl.style.left = `${px - cardW / 2}px`;
-          cardEl.style.top = `${py - cardH / 2}px`;
-
-          // Keep cards upright and legible by countering rotation, adding card default offsets
-          let finalRot = pin.rot || 0;
-          cardEl.style.transform = `rotate(${finalRot}deg)`;
-
-          // 3. Draw aa Radial needle spokes (Pins) in SVG
-          // Calculate spoke intersection point at edge of Level circle (r = 45px)
-          const startX = level.x + 45 * Math.cos(currentAngle);
-          const startY = level.y + 45 * Math.sin(currentAngle);
-
-          // Draw wobbly needle line
-          const pinLine = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          pinLine.setAttribute("d", `M ${startX} ${startY} L ${px} ${py}`);
-          pinLine.setAttribute("class", "connection-line");
-          
-          let strokeColor = '#64748B'; // Default needle color
-          let strokeW = 2.5;
-
-          if (pin.type === 'problem') strokeColor = '#E11D48';
-          if (pin.type === 'investigation') strokeColor = '#D97706';
-          if (pin.type === 'root_cause') strokeColor = '#8B5CF6';
-          if (pin.type === 'fix') strokeColor = '#10B981';
-          if (pin.type === 'validation') strokeColor = '#2563EB';
-          if (pin.type === 'resolved') strokeColor = '#059669';
-
-          pinLine.setAttribute("stroke", strokeColor);
-          pinLine.setAttribute("stroke-width", strokeW);
-          svgConnections.appendChild(pinLine);
-
-          // Draw small aa-style spoke terminal node dot on the card edge
-          const needleHead = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          needleHead.setAttribute("cx", px);
-          needleHead.setAttribute("cy", py);
-          needleHead.setAttribute("r", "5");
-          needleHead.setAttribute("fill", strokeColor);
-          needleHead.setAttribute("stroke", "#FFFFFF");
-          needleHead.setAttribute("stroke-width", "1.5");
-          svgConnections.appendChild(needleHead);
-        });
+        const pathEl = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        pathEl.setAttribute("d", pathD);
+        pathEl.setAttribute("class", "connection-line");
+        pathEl.setAttribute("stroke", strokeColor);
+        pathEl.setAttribute("stroke-width", strokeW);
+        if (strokeStyle === 'dashed') {
+          pathEl.setAttribute("stroke-dasharray", "6, 5");
+        }
+        pathEl.setAttribute("marker-end", "url(#arrow)");
+        svgConnections.appendChild(pathEl);
       });
-
-      requestAnimationFrame(aaRotationLoop);
     }
 
-    // Build Jump select navigation drawer
+    function getDockPoint(x, y, w, h, dock) {
+      switch (dock) {
+        case 'top': return { x: x + w / 2, y: y };
+        case 'bottom': return { x: x + w / 2, y: y + h };
+        case 'left': return { x: x, y: y + h / 2 };
+        case 'right': return { x: x + w, y: y + h / 2 };
+        default: return { x: x + w / 2, y: y + h / 2 };
+      }
+    }
+
+    // Build Jump panel list
     function buildJumpPanel() {
       const msList = document.getElementById("jump-milestones-list");
       const dbList = document.getElementById("jump-debugging-list");
 
-      levels.forEach(lvl => {
+      nodes.forEach(node => {
         const li = document.createElement("li");
         li.className = "jump-item";
-        li.innerText = `${lvl.name}: ${lvl.label}`;
+        li.innerText = node.label;
         li.onclick = () => {
-          centerOnLevel(lvl.id);
+          centerOnNode(node.id);
           toggleJumpPanel();
         };
-        msList.appendChild(li);
-      });
 
-      // Filter problem nodes
-      pins.filter(p => p.type === 'problem').forEach(prob => {
-        const li = document.createElement("li");
-        li.className = "jump-item";
-        li.innerText = prob.label;
-        li.style.color = '#EF4444';
-        li.onclick = () => {
-          centerOnLevel(prob.levelId);
-          toggleJumpPanel();
-        };
-        dbList.appendChild(li);
+        if (node.type === 'milestone') {
+          msList.appendChild(li);
+        } else if (node.type === 'problem') {
+          li.style.color = '#EF4444';
+          dbList.appendChild(li);
+        }
       });
     }
 
-    // Draggable systems (wheel nodes & custom doodles)
+    // Draggable management (nodes, stickies, polaroids, sketches)
     function setupDraggables() {
       canvas.addEventListener("mousedown", (e) => {
         if (activeTool !== 'select') return;
+        const dragEl = e.target.closest(".draggable-node, .draggable-sticky, .polaroid, .whiteboard-sketch");
+        if (!dragEl) return;
 
-        // 1. Drag level wheel centers
-        const wheelEl = e.target.closest(".aa-wheel");
-        if (wheelEl) {
-          activeDragEl = wheelEl;
-          const level = levels.find(l => l.id === wheelEl.id);
-          dragStartX = e.clientX;
-          dragStartY = e.clientY;
-          dragOffsetLeft = level.x;
-          dragOffsetTop = level.y;
-          e.stopPropagation();
-          return;
-        }
+        activeDragEl = dragEl;
+        const canvasCoords = getCanvasCoords(e);
+        dragStartX = canvasCoords.x;
+        dragStartY = canvasCoords.y;
+        dragOffsetLeft = parseFloat(dragEl.style.left) || 0;
+        dragOffsetTop = parseFloat(dragEl.style.top) || 0;
 
-        // 2. Drag custom annotations or polaroids
-        const otherEl = e.target.closest(".polaroid, .whiteboard-sketch");
-        if (otherEl) {
-          activeDragEl = otherEl;
-          const canvasCoords = getCanvasCoords(e);
-          dragStartX = canvasCoords.x;
-          dragStartY = canvasCoords.y;
-          dragOffsetLeft = parseFloat(otherEl.style.left) || 0;
-          dragOffsetTop = parseFloat(otherEl.style.top) || 0;
-          otherEl.style.zIndex = 50;
-          e.stopPropagation();
-          return;
-        }
-
-        // 3. Drag orbiting pins: Adjusts orbit angle & radius interactively!
-        const cardEl = e.target.closest(".draggable-node, .draggable-sticky");
-        if (cardEl) {
-          activeDragEl = cardEl;
-          const level = levels.find(l => l.pins.some(p => p.id === cardEl.id));
-          const pin = level.pins.find(p => p.id === cardEl.id);
-
-          dragStartX = level.x;
-          dragStartY = level.y;
-          
-          activeDragEl.style.zIndex = 50;
-          e.stopPropagation();
-        }
+        dragEl.style.zIndex = 50; // Pull to front
+        e.stopPropagation();
       });
 
       window.addEventListener("mousemove", (e) => {
         if (!activeDragEl) return;
-
-        // If dragging Level center wheel
-        if (activeDragEl.classList.contains("aa-wheel")) {
-          const dx = (e.clientX - dragStartX) / scale;
-          const dy = (e.clientY - dragStartY) / scale;
-
-          const level = levels.find(l => l.id === activeDragEl.id);
-          level.x = dragOffsetLeft + dx;
-          level.y = dragOffsetTop + dy;
-          updateMinimap();
-          return;
-        }
-
-        // If dragging Polaroid/Sketch
-        if (activeDragEl.classList.contains("polaroid") || activeDragEl.classList.contains("whiteboard-sketch")) {
-          const canvasCoords = getCanvasCoords(e);
-          const dx = canvasCoords.x - dragStartX;
-          const dy = canvasCoords.y - dragStartY;
-          activeDragEl.style.left = `${dragOffsetLeft + dx}px`;
-          activeDragEl.style.top = `${dragOffsetTop + dy}px`;
-          updateMinimap();
-          return;
-        }
-
-        // If dragging Orbiting Card: Recalculate orbit radius and angleOffset dynamically
-        const level = levels.find(l => l.pins.some(p => p.id === activeDragEl.id));
-        const pin = level.pins.find(p => p.id === activeDragEl.id);
-
         const canvasCoords = getCanvasCoords(e);
-        const dx = canvasCoords.x - level.x;
-        const dy = canvasCoords.y - level.y;
+        const dx = canvasCoords.x - dragStartX;
+        const dy = canvasCoords.y - dragStartY;
 
-        pin.len = Math.max(100, Math.sqrt(dx * dx + dy * dy)); // Set radial length bounds
-        pin.baseAngle = Math.atan2(dy, dx) - level.angle;     // Align angle offset
+        activeDragEl.style.left = `${dragOffsetLeft + dx}px`;
+        activeDragEl.style.top = `${dragOffsetTop + dy}px`;
+
+        // Update arrays to keep coordinates in sync
+        const nodeObj = nodes.find(n => n.id === activeDragEl.id);
+        if (nodeObj) {
+          nodeObj.x = dragOffsetLeft + dx;
+          nodeObj.y = dragOffsetTop + dy;
+        }
+
+        const stickyObj = stickies.find(s => s.id === activeDragEl.id);
+        if (stickyObj) {
+          stickyObj.x = dragOffsetLeft + dx;
+          stickyObj.y = dragOffsetTop + dy;
+        }
+
+        const polaroidObj = polaroids.find(p => p.id === activeDragEl.id);
+        if (polaroidObj) {
+          polaroidObj.x = dragOffsetLeft + dx;
+          polaroidObj.y = dragOffsetTop + dy;
+        }
+
+        const sketchObj = sketches.find(s => s.id === activeDragEl.id);
+        if (sketchObj) {
+          sketchObj.x = dragOffsetLeft + dx;
+          sketchObj.y = dragOffsetTop + dy;
+        }
+
+        drawConnections();
+        updateMinimap();
       });
 
       window.addEventListener("mouseup", () => {
@@ -1649,43 +1633,25 @@
     // Double-Click empty space to drop new Sticky Note
     viewport.addEventListener("dblclick", (e) => {
       if (activeTool !== 'select' && activeTool !== 'sticky') return;
-      if (e.target.closest('.node-card') || e.target.closest('.sticky-note') || e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header') || e.target.closest('.collaborators') || e.target.closest('.polaroid') || e.target.closest('.jump-drawer') || e.target.closest('.jump-panel-toggle') || e.target.closest('.aa-wheel')) return;
+      if (e.target.closest('.node-card') || e.target.closest('.sticky-note') || e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header') || e.target.closest('.collaborators') || e.target.closest('.polaroid') || e.target.closest('.jump-drawer') || e.target.closest('.jump-panel-toggle') || e.target.closest('.whiteboard-sketch')) return;
 
       const coords = getCanvasCoords(e);
-      
-      // Find closest level center to bind orbital
-      let closestLvl = levels[0];
-      let minDist = Infinity;
-      levels.forEach(lvl => {
-        const dx = coords.x - lvl.x;
-        const dy = coords.y - lvl.y;
-        const dist = dx*dx + dy*dy;
-        if (dist < minDist) {
-          minDist = dist;
-          closestLvl = lvl;
-        }
-      });
-
-      const dx = coords.x - closestLvl.x;
-      const dy = coords.y - closestLvl.y;
-
       const newSticky = {
         id: `custom_sticky_${Date.now()}`,
-        levelId: closestLvl.id,
         color: ['yellow', 'blue', 'pink', 'green'][Math.floor(Math.random() * 4)],
         text: 'Double click to edit note...',
+        x: coords.x - 95,
+        y: coords.y - 95,
         author: 'Founder',
-        rot: Math.floor(Math.random() * 8) - 4,
-        len: Math.max(100, Math.sqrt(dx*dx + dy*dy)),
-        baseAngle: Math.atan2(dy, dx) - closestLvl.angle
+        rot: Math.floor(Math.random() * 8) - 4
       };
 
       // Create sticky DOM
       const stickyEl = document.createElement("div");
       stickyEl.className = `sticky-note sticky-${newSticky.color} draggable-sticky`;
       stickyEl.id = newSticky.id;
-      stickyEl.style.left = `0px`;
-      stickyEl.style.top = `0px`;
+      stickyEl.style.left = `${newSticky.x}px`;
+      stickyEl.style.top = `${newSticky.y}px`;
       stickyEl.style.transform = `rotate(${newSticky.rot}deg)`;
 
       stickyEl.innerHTML = `
@@ -1697,15 +1663,14 @@
       `;
       canvas.appendChild(stickyEl);
 
-      closestLvl.pins.push(newSticky);
-      setupDraggables(); // Re-bind events
+      setupDraggables(); // Re-bind events to cover new sticky
       updateMinimap();
     });
 
     // Panning canvas logic
     viewport.addEventListener("mousedown", (e) => {
       if (activeTool !== 'select') return;
-      if (e.target.closest('.node-card') || e.target.closest('.sticky-note') || e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header') || e.target.closest('.collaborators') || e.target.closest('.polaroid') || e.target.closest('.jump-drawer') || e.target.closest('.jump-panel-toggle') || e.target.closest('.aa-wheel')) return;
+      if (e.target.closest('.node-card') || e.target.closest('.sticky-note') || e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header') || e.target.closest('.collaborators') || e.target.closest('.polaroid') || e.target.closest('.jump-drawer') || e.target.closest('.jump-panel-toggle') || e.target.closest('.whiteboard-sketch')) return;
 
       isDraggingCanvas = true;
       startX = e.clientX - translateX;
@@ -1778,7 +1743,7 @@
 
     function resetZoom() {
       scale = 1;
-      centerOnLevel('lvl1');
+      centerOnNode('idea');
     }
 
     // Scroll Wheel Zoom centered on cursor position
@@ -1810,16 +1775,26 @@
       zoomPercent.innerText = `${Math.round(scale * 100)}%`;
     }
 
-    // Center viewport on specific level center ID
-    function centerOnLevel(levelId) {
-      const lvl = levels.find(l => l.id === levelId);
-      if (!lvl) return;
+    // Center viewport on specific node ID
+    function centerOnNode(nodeId) {
+      const el = document.getElementById(nodeId);
+      if (!el) return;
+
+      const nodeObj = nodes.find(n => n.id === nodeId);
+      if (!nodeObj) return;
 
       const vWidth = viewport.clientWidth;
       const vHeight = viewport.clientHeight;
 
-      translateX = (vWidth / 2) - lvl.x * scale;
-      translateY = (vHeight / 2) - lvl.y * scale;
+      const cardW = el.offsetWidth || 540;
+      const cardH = el.offsetHeight || 200;
+
+      // Card center coordinates
+      const targetX = nodeObj.x + cardW / 2;
+      const targetY = nodeObj.y + cardH / 2;
+
+      translateX = (vWidth / 2) - targetX * scale;
+      translateY = (vHeight / 2) - targetY * scale;
 
       updateTransform();
       updateMinimap();
@@ -1830,7 +1805,7 @@
       document.getElementById("jump-drawer").classList.toggle("open");
     }
 
-    // Realtime Cursors Simulators
+    // Realtime Cursors Simulators (Multiplayer War Room)
     const cursors = [
       { id: 'c1', name: 'Aryan (Founder)', color: '#EF4444', x: 1350, y: 400, tx: 1350, ty: 400 },
       { id: 'c2', name: 'Siddharth (Backend)', color: '#22C55E', x: 1050, y: 750, tx: 1050, ty: 750 },
@@ -1854,7 +1829,7 @@
       // Drift loop
       setInterval(() => {
         cursors.forEach(cur => {
-          const anchor = levels[Math.floor(Math.random() * levels.length)];
+          const anchor = nodes[Math.floor(Math.random() * nodes.length)];
           cur.tx = anchor.x + Math.floor(Math.random() * 400) - 200;
           cur.ty = anchor.y + Math.floor(Math.random() * 300) - 150;
         });
@@ -1879,8 +1854,8 @@
 
     // Minimap Render & Drag Controls
     function updateMinimap() {
-      const cWidth = 2800;
-      const cHeight = 11000;
+      const cWidth = 3200;
+      const cHeight = 12000;
       const mWidth = minimapArea.clientWidth;
       const mHeight = minimapArea.clientHeight;
 
@@ -1901,11 +1876,11 @@
 
       const existingDots = minimapArea.querySelectorAll(".minimap-dot");
       if (existingDots.length === 0) {
-        levels.forEach(lvl => {
+        nodes.forEach(node => {
           const dot = document.createElement("div");
-          dot.className = "minimap-dot milestone";
-          dot.style.left = `${lvl.x * minimapScale}px`;
-          dot.style.top = `${lvl.y * minimapScale}px`;
+          dot.className = `minimap-dot ${node.type}`;
+          dot.style.left = `${node.x * minimapScale}px`;
+          dot.style.top = `${node.y * minimapScale}px`;
           minimapArea.appendChild(dot);
         });
       }
@@ -1924,8 +1899,8 @@
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
-      const cWidth = 2800;
-      const cHeight = 11000;
+      const cWidth = 3200;
+      const cHeight = 12000;
       const mWidth = minimapArea.clientWidth;
 
       const minimapScale = mWidth / cWidth;
