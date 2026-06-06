@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antrix AI V2 — Engineering Journey Map</title>
-  <!-- Google Fonts for professional and handwriting contrast -->
+  <title>Antrix AI V2 — Founder's Engineering Notebook</title>
+  <!-- Google Fonts for premium scanned notebook contrast -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Kalam:wght@300;400;700&family=Architects+Daughter&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Kalam:wght@300;400;700&family=Architects+Daughter&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-canvas: #FFFFFF;
-      --border-slate: #0F172A;
+      --bg-canvas: #FCFBF9; /* Warm off-white paper color */
+      --border-slate: #1E293B; /* Dark slate pen ink color */
       
       --color-blue: #EFF6FF;
       --border-blue: #2563EB;
@@ -39,8 +39,9 @@
       --text-red: #991B1B;
       
       --font-sans: 'Inter', sans-serif;
-      --font-handwritten: 'Kalam', cursive;
-      --font-board: 'Architects Daughter', cursive;
+      --font-handwritten: 'Caveat', cursive; /* Flowing script */
+      --font-board: 'Kalam', cursive; /* Print handwriting */
+      --font-doodle: 'Architects Daughter', cursive;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -58,6 +59,21 @@
       overflow: hidden;
       width: 100vw;
       height: 100vh;
+      position: relative;
+    }
+
+    /* Page Scan Overlay (Scanner Grain / Noise) */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.045;
+      z-index: 9999;
+      pointer-events: none;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
     /* Infinite Canvas Viewport */
@@ -66,8 +82,10 @@
       height: 100vh;
       overflow: hidden;
       position: relative;
-      background-color: #FFFFFF;
-      background-image: radial-gradient(#CBD5E1 1.2px, transparent 1.2px);
+      background-color: var(--bg-canvas);
+      background-image: 
+        linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
       background-size: 24px 24px;
       cursor: grab;
     }
@@ -88,6 +106,30 @@
       transition: transform 0.05s ease-out;
     }
 
+    /* Red notebook margin line on canvas */
+    .canvas::before {
+      content: "";
+      position: absolute;
+      left: 80px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background-color: rgba(239, 68, 68, 0.18);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Notebook Spiral Rings (Left border) */
+    .notebook-ring {
+      width: 26px;
+      height: 10px;
+      background: linear-gradient(to bottom, #E2E8F0, #94A3B8, #CBD5E1);
+      border: 1px solid #475569;
+      border-radius: 4px;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+      margin-bottom: 80px;
+    }
+
     /* Hand-drawn SVG Displacement filter (Wobbler) */
     .handdrawn-filter {
       position: absolute;
@@ -104,23 +146,24 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
       padding: 12px 18px;
       display: flex;
       align-items: center;
       gap: 12px;
       box-shadow: 4px 4px 0px var(--border-slate);
+      filter: url(#handdrawn);
     }
 
     .board-title-text {
       font-weight: 900;
       font-size: 16px;
-      font-family: var(--font-sans);
+      font-family: var(--font-board);
       letter-spacing: -0.02em;
     }
 
     .board-badge {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       background: #EFF6FF;
       border: 1.5px solid var(--border-blue);
@@ -128,6 +171,7 @@
       padding: 2px 6px;
       border-radius: 4px;
       text-transform: uppercase;
+      font-family: var(--font-sans);
     }
 
     /* Floating Cursors list (Top Right) */
@@ -172,7 +216,7 @@
       border: 1.5px solid #FFFFFF;
     }
 
-    /* Miro Sidebar Tools (Left Center) */
+    /* n8n Sidebar Tools (Left Center) */
     .toolbar {
       position: fixed;
       top: 50%;
@@ -181,12 +225,13 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
       padding: 8px;
       display: flex;
       flex-direction: column;
       gap: 8px;
       box-shadow: 4px 4px 0px var(--border-slate);
+      filter: url(#handdrawn);
     }
 
     .tool-btn {
@@ -228,6 +273,7 @@
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.15s ease;
+      font-family: var(--font-sans);
     }
 
     .tool-btn:hover .tool-tooltip {
@@ -242,7 +288,7 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
       padding: 6px 12px;
       display: flex;
       align-items: center;
@@ -251,6 +297,7 @@
       font-size: 13px;
       font-weight: 700;
       color: #475569;
+      filter: url(#handdrawn);
     }
 
     .zoom-btn {
@@ -268,7 +315,7 @@
       color: #0F172A;
     }
 
-    /* Floating Navigation Drawer (Bottom Left, above zoom) */
+    /* Floating Navigation Drawer */
     .jump-panel-toggle {
       position: fixed;
       bottom: 70px;
@@ -276,7 +323,7 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
       padding: 8px 12px;
       font-size: 12px;
       font-weight: 700;
@@ -286,6 +333,8 @@
       align-items: center;
       gap: 6px;
       transition: all 0.15s ease;
+      font-family: var(--font-board);
+      filter: url(#handdrawn);
     }
 
     .jump-panel-toggle:hover {
@@ -302,7 +351,7 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: 12px;
       box-shadow: 5px 5px 0px var(--border-slate);
       transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -313,7 +362,8 @@
     }
 
     .jump-drawer h3 {
-      font-size: 13px;
+      font-size: 14px;
+      font-family: var(--font-board);
       font-weight: 800;
       margin-bottom: 8px;
       text-transform: uppercase;
@@ -331,7 +381,7 @@
 
     .jump-item {
       padding: 6px 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       border-radius: 4px;
@@ -339,6 +389,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      font-family: var(--font-board);
     }
 
     .jump-item:hover {
@@ -372,6 +423,7 @@
       white-space: nowrap;
       box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
       border: 1px solid rgba(0,0,0,0.1);
+      font-family: var(--font-sans);
     }
 
     /* Overlay Drawing layer */
@@ -410,10 +462,10 @@
     }
 
     .arrowhead {
-      fill: #0F172A;
+      fill: #1E293B;
     }
 
-    /* APPLE KEYNOTE SLIDE CARD STYLE */
+    /* FOUNDER'S NOTEBOOK SCRIBBLED CUTOUTS (NOT CARDS) */
     .node-card {
       position: absolute;
       width: 540px;
@@ -421,7 +473,7 @@
       padding: 24px;
       cursor: grab;
       z-index: 20;
-      transition: box-shadow 0.15s ease;
+      transition: transform 0.15s ease;
     }
 
     .node-card:active {
@@ -434,15 +486,30 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 2.5px solid var(--border-slate);
-      border-radius: 12px;
-      box-shadow: 6px 6px 0px var(--border-slate);
+      border: 2px solid var(--border-slate);
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; /* Wobbly sketched border */
+      box-shadow: 3px 5px 12px rgba(0, 0, 0, 0.04);
+      background-color: rgba(255, 255, 255, 0.94); /* Scanned paper fragment */
       z-index: 1;
       pointer-events: none;
+      filter: url(#handdrawn); /* Sketched lines distortion */
     }
 
-    .node-card:hover .node-card-bg {
-      box-shadow: 8px 8px 0px var(--border-slate);
+    /* Masking / Scotch Tape holding notebook scraps */
+    .node-card.milestone::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1deg);
+      width: 90px;
+      height: 22px;
+      background-color: rgba(245, 243, 217, 0.65); /* Translucent yellowed scotch tape */
+      border-left: 1px dashed rgba(0, 0, 0, 0.1);
+      border-right: 1px dashed rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      z-index: 25;
+      pointer-events: none;
     }
 
     .node-content-wrapper {
@@ -454,44 +521,50 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 2px solid #CBD5E1;
+      border-bottom: 2px dashed #CBD5E1;
       padding-bottom: 8px;
       margin-bottom: 12px;
     }
 
     .node-title-label {
-      font-weight: 900;
-      font-size: 20px;
-      font-family: var(--font-sans);
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      font-size: 18px;
+      font-family: var(--font-board); /* Sketched print font */
+      letter-spacing: -0.01em;
       color: #0F172A;
     }
 
     .node-type-pill {
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
       border: 1.5px solid var(--border-slate);
       background: white;
-      font-family: var(--font-sans);
+      font-family: var(--font-board);
     }
 
     .node-body {
       font-size: 13.5px;
       color: #334155;
-      line-height: 1.5;
-      font-family: var(--font-sans);
+      line-height: 1.55;
+      font-family: var(--font-sans); /* Clean readable main text */
     }
 
     .node-body strong {
       color: #0F172A;
       font-weight: 800;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-size: 14.5px;
+      font-family: var(--font-board);
+      /* Yellow highlighter effect on section headings */
+      background: linear-gradient(104deg, rgba(254, 240, 138, 0.8) 0%, rgba(254, 240, 138, 0.25) 100%);
+      padding: 2px 6px;
+      border-radius: 3px;
+      width: fit-content;
     }
 
     .node-body ul {
@@ -500,10 +573,10 @@
     }
 
     .node-body li {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
-    /* DEBUGGING STEP CARDS (Smaller, flow-based) */
+    /* DEBUGGING STEP CUTOUTS (Direct scribbles on paper, smaller) */
     .node-card.problem,
     .node-card.investigation,
     .node-card.root_cause,
@@ -511,7 +584,7 @@
     .node-card.validation,
     .node-card.resolved {
       width: 480px;
-      min-height: 140px;
+      min-height: 130px;
       padding: 18px;
     }
 
@@ -524,31 +597,31 @@
       font-size: 16px;
     }
 
-    /* CARD COLOR SYSTEM */
-    .color-blue .node-card-bg { background-color: var(--color-blue); }
-    .color-blue .node-type-pill { border-color: var(--border-blue); color: var(--text-blue); }
+    /* CARD COLOR SYSTEM (Marker Tints & Ink variations) */
+    .color-blue .node-card-bg { background-color: rgba(240, 249, 255, 0.94); border-color: #0284c7; }
+    .color-blue .node-type-pill { border-color: #0284c7; color: var(--text-blue); }
 
-    .color-green .node-card-bg { background-color: var(--color-green); }
-    .color-green .node-type-pill { border-color: var(--border-green); color: var(--text-green); }
+    .color-green .node-card-bg { background-color: rgba(240, 253, 244, 0.94); border-color: #059669; }
+    .color-green .node-type-pill { border-color: #059669; color: var(--text-green); }
 
-    .color-yellow .node-card-bg { background-color: var(--color-yellow); }
-    .color-yellow .node-type-pill { border-color: var(--border-yellow); color: var(--text-yellow); }
+    .color-yellow .node-card-bg { background-color: rgba(254, 252, 232, 0.94); border-color: #d97706; }
+    .color-yellow .node-type-pill { border-color: #d97706; color: var(--text-yellow); }
 
-    .color-pink .node-card-bg { background-color: var(--color-pink); }
-    .color-pink .node-type-pill { border-color: var(--border-pink); color: var(--text-pink); }
+    .color-pink .node-card-bg { background-color: rgba(253, 242, 248, 0.94); border-color: #db2777; }
+    .color-pink .node-type-pill { border-color: #db2777; color: var(--text-pink); }
 
-    .color-purple .node-card-bg { background-color: var(--color-purple); }
-    .color-purple .node-type-pill { border-color: var(--border-purple); color: var(--text-purple); }
+    .color-purple .node-card-bg { background-color: rgba(250, 245, 255, 0.94); border-color: #7c3aed; }
+    .color-purple .node-type-pill { border-color: #7c3aed; color: var(--text-purple); }
 
-    .color-red .node-card-bg { background-color: var(--color-red); }
-    .color-red .node-type-pill { border-color: var(--border-red); color: var(--text-red); }
+    .color-red .node-card-bg { background-color: rgba(254, 242, 242, 0.94); border-color: #ef4444; }
+    .color-red .node-type-pill { border-color: #ef4444; color: var(--text-red); }
 
-    /* MIRO STICKY NOTES */
+    /* PHYSICAL STICKY NOTES */
     .sticky-note {
       position: absolute;
-      width: 190px;
-      height: 190px;
-      padding: 16px;
+      width: 200px;
+      height: 200px;
+      padding: 18px;
       cursor: grab;
       z-index: 18;
       display: flex;
@@ -562,9 +635,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 2px solid var(--border-slate);
-      box-shadow: 4px 4px 0px var(--border-slate);
-      filter: url(#handdrawn);
+      border: 2px solid #1E293B;
+      box-shadow: 4px 4px 0px #1E293B;
+      filter: url(#handdrawn); /* Slight ripple edge */
       z-index: 1;
     }
 
@@ -592,29 +665,29 @@
 
     .sticky-text {
       font-family: var(--font-handwritten);
-      font-size: 15px;
-      line-height: 1.4;
+      font-size: 17px;
+      line-height: 1.35;
       font-weight: 700;
       word-wrap: break-word;
       outline: none;
     }
 
     .sticky-footer {
-      font-family: var(--font-board);
+      font-family: var(--font-doodle);
       font-size: 10px;
       font-weight: 700;
       opacity: 0.7;
       text-align: right;
     }
 
-    /* Polaroid Snapshots */
+    /* Polaroid Snapshots (Scanned Photos) */
     .polaroid {
       position: absolute;
-      width: 210px;
-      background: white;
+      width: 220px;
+      background: #FAF8F5;
       border: 2px solid var(--border-slate);
-      box-shadow: 5px 5px 0px var(--border-slate);
-      padding: 10px;
+      box-shadow: 4px 6px 0px var(--border-slate);
+      padding: 12px;
       z-index: 15;
       cursor: grab;
       filter: rotate(2deg);
@@ -633,14 +706,14 @@
 
     .polaroid-caption {
       font-family: var(--font-handwritten);
-      font-size: 13.5px;
+      font-size: 16px;
       font-weight: 700;
       text-align: center;
       margin-top: 8px;
       color: #334155;
     }
 
-    /* Scotch Tape */
+    /* Translucent Tape on Polaroid */
     .tape {
       position: absolute;
       top: -12px;
@@ -656,12 +729,12 @@
       pointer-events: none;
     }
 
-    /* Coffee Stain */
+    /* Coffee Stain (Ring Doodles) */
     .coffee-stain {
       position: absolute;
       width: 160px;
       height: 160px;
-      border: 3px solid rgba(139, 90, 43, 0.12);
+      border: 3.5px solid rgba(139, 90, 43, 0.12);
       border-radius: 50%;
       filter: url(#handdrawn) blur(0.5px);
       pointer-events: none;
@@ -675,11 +748,11 @@
       left: 10px;
       width: 135px;
       height: 135px;
-      border: 1px solid rgba(139, 90, 43, 0.06);
+      border: 1.5px solid rgba(139, 90, 43, 0.07);
       border-radius: 50%;
     }
 
-    /* Pushpin */
+    /* Red Pushpin */
     .pushpin {
       position: absolute;
       top: -10px;
@@ -695,13 +768,13 @@
       pointer-events: none;
     }
 
-    /* Visual Annotations (Text directly on board) */
+    /* Visual Annotations (Text directly on board pages) */
     .board-annotation {
       position: absolute;
       font-family: var(--font-handwritten);
-      font-size: 16px;
+      font-size: 21px;
       font-weight: 700;
-      color: #4F46E5;
+      color: #1D4ED8; /* Ballpoint pen blue ink */
       pointer-events: none;
       z-index: 4;
       line-height: 1.3;
@@ -711,54 +784,57 @@
     /* Sketches on the Board */
     .whiteboard-sketch {
       position: absolute;
-      border: 2px dashed #94A3B8;
+      border: 2px dashed #64748B;
       border-radius: 8px;
       padding: 16px;
-      background: rgba(255,255,255,0.4);
+      background: rgba(252, 251, 249, 0.92);
       z-index: 3;
       pointer-events: none;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      filter: url(#handdrawn);
     }
 
     .sketch-title {
       font-family: var(--font-board);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
-      color: #64748B;
+      color: #475569;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     .sketch-box {
-      border: 2px solid #64748B;
+      border: 1.5px solid #475569;
       background: white;
-      border-radius: 6px;
+      border-radius: 4px;
       padding: 8px 12px;
-      font-family: var(--font-mono);
-      font-size: 10px;
+      font-family: var(--font-board);
+      font-size: 13px;
+      font-weight: 700;
       color: #334155;
-      box-shadow: 2px 2px 0px #64748B;
+      box-shadow: 2px 2px 0px #475569;
     }
 
     .live-badge-block {
       background-color: #ECFDF5;
-      border: 3.5px solid #10B981;
+      border: 3px solid #10B981;
       color: #065F46;
-      font-family: var(--font-sans);
-      font-size: 24px;
+      font-family: var(--font-board);
+      font-size: 20px;
       font-weight: 900;
       text-align: center;
-      padding: 16px 32px;
-      border-radius: 16px;
-      box-shadow: 6px 6px 0px #065F46;
+      padding: 10px 24px;
+      border-radius: 12px;
+      box-shadow: 4px 4px 0px #065F46;
       transform: rotate(-1.5deg);
       display: inline-block;
       margin-top: 10px;
+      filter: url(#handdrawn);
     }
 
-    /* Floating Minimap (Bottom Right) */
+    /* Floating Minimap */
     .minimap-container {
       position: fixed;
       bottom: 16px;
@@ -766,12 +842,13 @@
       z-index: 100;
       background: #FFFFFF;
       border: 2px solid var(--border-slate);
-      border-radius: 8px;
+      border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
       width: 180px;
       height: 220px;
       box-shadow: 4px 4px 0px var(--border-slate);
       overflow: hidden;
       padding: 6px;
+      filter: url(#handdrawn);
     }
 
     .minimap-header {
@@ -782,13 +859,14 @@
       margin-bottom: 4px;
       border-bottom: 1px solid #E2E8F0;
       padding-bottom: 2px;
+      font-family: var(--font-sans);
     }
 
     .minimap-viewport-area {
       position: relative;
       width: 100%;
       height: calc(100% - 18px);
-      background: #F8FAFC;
+      background: #FAF9F6;
       border: 1px solid #E2E8F0;
     }
 
@@ -804,7 +882,7 @@
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: #CBD5E1;
+      background: #94A3B8;
       transform: translate(-50%, -50%);
     }
 
@@ -817,8 +895,8 @@
   <svg class="handdrawn-filter">
     <defs>
       <filter id="handdrawn" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
   </svg>
@@ -826,7 +904,7 @@
   <!-- Board Header Panel -->
   <div class="board-header">
     <div class="board-title-text">ANTRIX AI V2 — Engineering Journey Map</div>
-    <span class="board-badge">War Room Board</span>
+    <span class="board-badge">Founder's Notebook</span>
   </div>
 
   <!-- Realtime Collaborators display -->
@@ -864,14 +942,14 @@
   <!-- Navigation Drawer Toggle -->
   <button class="jump-panel-toggle" onclick="toggleJumpPanel()">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-    Jump Panel
+    Notebook Index
   </button>
 
   <!-- Left Jump Navigation Drawer -->
   <div class="jump-drawer" id="jump-drawer">
-    <h3>Milestones Journey</h3>
+    <h3>Milestones Log</h3>
     <ul class="jump-list" id="jump-milestones-list"></ul>
-    <h3 style="margin-top: 14px;">Debugging Paths</h3>
+    <h3 style="margin-top: 14px;">Debugging Pathways</h3>
     <ul class="jump-list" id="jump-debugging-list"></ul>
   </div>
 
@@ -880,12 +958,12 @@
     <button class="zoom-btn" onclick="adjustZoom(-0.1)">−</button>
     <span id="zoom-percent">100%</span>
     <button class="zoom-btn" onclick="adjustZoom(0.1)">+</button>
-    <button class="zoom-btn" onclick="resetZoom()" style="font-size: 11px; margin-left: 4px; text-transform: uppercase;">Reset</button>
+    <button class="zoom-btn" onclick="resetZoom()" style="font-size: 11px; margin-left: 4px; text-transform: uppercase; font-family: var(--font-board);">Reset</button>
   </div>
 
   <!-- Floating Minimap (Bottom Right) -->
   <div class="minimap-container">
-    <div class="minimap-header">Whiteboard Minimap</div>
+    <div class="minimap-header">Notebook Map Overview</div>
     <div class="minimap-viewport-area" id="minimap-area">
       <div class="minimap-box" id="minimap-box"></div>
     </div>
@@ -906,13 +984,13 @@
       <svg class="svg-canvas-lines" id="svg-connections">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0F172A"/>
+            <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1E293B"/>
           </marker>
         </defs>
       </svg>
 
       <!-- Draw static background sketches on canvas -->
-      <!-- Visual System Architecture diagram sketch (x: 150, y: 550) -->
+      <!-- Visual System Architecture diagram sketch -->
       <div class="whiteboard-sketch" style="left: 150px; top: 540px; width: 620px;" id="sketch-arch">
         <div class="sketch-title">System Architecture Flow Schema</div>
         <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
@@ -929,41 +1007,41 @@
           <div style="display:flex; align-items:center; gap:8px;">
             <div class="sketch-box" style="width:180px;text-align:center;">Database Layer</div>
             <div style="color:#64748B;">⬎</div>
-            <div class="sketch-box" style="width:200px;text-align:center;">AI Generation Infrastructure</div>
+            <div class="sketch-box" style="width:220px;text-align:center;">AI Generation Infrastructure</div>
             <div style="color:#64748B;">➔</div>
             <div class="sketch-box" style="width:150px;text-align:center;">Secure Tunnel Layer</div>
           </div>
           <div style="display:flex; align-items:center; gap:8px; padding-left: 20px;">
-            <div style="color:#64748B; padding-left: 420px;">▼</div>
+            <div style="color:#64748B; padding-left: 440px;">▼</div>
           </div>
           <div style="display:flex; align-items:center; gap:8px; justify-content: flex-end; padding-right:20px;">
             <div class="sketch-box" style="width:180px;text-align:center;">Image Delivery</div>
           </div>
         </div>
-        <div style="font-family: var(--font-handwritten); font-size: 13px; color: #4F46E5; text-align: center; margin-top: 4px;">
+        <div style="font-family: var(--font-handwritten); font-size: 17px; color: #1D4ED8; text-align: center; margin-top: 4px; font-weight: bold;">
           * Note: User prompt payload triggers local queue generation, writes metadata, and returns fast WebP stream.
         </div>
       </div>
 
-      <!-- PostgreSQL Database schema sketch (x: 1450, y: 2200) -->
+      <!-- PostgreSQL Database schema sketch -->
       <div class="whiteboard-sketch" style="left: 1450px; top: 2200px; width: 620px;" id="sketch-db">
         <div class="sketch-title">PostgreSQL Database Schema Indices</div>
         <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-          <div class="sketch-box" style="width: 180px;">
+          <div class="sketch-box" style="width: 180px; line-height: 1.4;">
             <strong style="color:#2563EB;">table: users</strong>
             - id (PK) uuid<br>
             - email varchar<br>
             - hashed_pass varchar<br>
             - is_active boolean
           </div>
-          <div class="sketch-box" style="width: 180px;">
+          <div class="sketch-box" style="width: 180px; line-height: 1.4;">
             <strong style="color:#2563EB;">table: credits</strong>
             - id (PK) serial<br>
             - user_id (FK) -> users.id<br>
             - balance integer<br>
             - updated_at timestamp
           </div>
-          <div class="sketch-box" style="width: 180px;">
+          <div class="sketch-box" style="width: 180px; line-height: 1.4;">
             <strong style="color:#2563EB;">table: generations</strong>
             - id (PK) uuid<br>
             - user_id (FK) -> users.id<br>
@@ -971,21 +1049,21 @@
             - image_url varchar
           </div>
         </div>
-        <div style="font-family: var(--font-handwritten); font-size: 13px; color: #E11D48; text-align: center; margin-top: 4px;">
+        <div style="font-family: var(--font-handwritten); font-size: 17px; color: #DC2626; text-align: center; margin-top: 4px; font-weight: bold;">
           * Schema auto-migrations compare model keys on startup. ALTER tables dynamically.
         </div>
       </div>
 
-      <!-- local AI pipeline schema sketch (x: 150, y: 7000) -->
+      <!-- local AI pipeline schema sketch -->
       <div class="whiteboard-sketch" style="left: 150px; top: 7000px; width: 780px;" id="sketch-pipeline">
         <div class="sketch-title">AI Processing &amp; Local Caching Pipeline</div>
-        <div style="display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: #334155;">
+        <div style="display: flex; flex-direction: column; gap: 8px; font-family: var(--font-board); font-size: 13px; color: #475569;">
           <div>1. Frontend POST request sent to Render server -> Debit credit row inside SQL transaction lock</div>
-          <div>2. Render passes parameters down Dynamic AI Node Tunnel -> Registers Prompt ID inside local Comfy queue</div>
+          <div>2. Render passes parameters down Dynamic AI Node Tunnel -> Registers Prompt ID inside local AI Inference queue</div>
           <div>3. Local GPU Node render completes -> WebP image file cached inside local filesystem static directory</div>
           <div>4. Fallback loops auto-retrieve files from physical GPU disk if Render stateless server scales down</div>
         </div>
-        <div style="font-family: var(--font-handwritten); font-size: 13px; color: #059669; text-align: center;">
+        <div style="font-family: var(--font-handwritten); font-size: 18px; color: #059669; text-align: center; font-weight: bold; margin-top: 6px;">
           * Queue status polling keeps client updated on queue position and rendering completion.
         </div>
       </div>
@@ -996,8 +1074,8 @@
         <div class="tape"></div>
         <div class="polaroid-photo">
           <svg width="100%" height="100%" viewBox="0 0 200 150" fill="none">
-            <rect width="200" height="150" fill="#f8fafc"/>
-            <rect x="20" y="20" width="160" height="110" rx="4" fill="white" stroke="#64748b" stroke-width="1.5"/>
+            <rect width="200" height="150" fill="#FAF8F5"/>
+            <rect x="20" y="20" width="160" height="110" rx="4" fill="white" stroke="#475569" stroke-width="1.5" filter="url(#handdrawn)"/>
             <text x="30" y="45" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Antrix AI Studio</text>
             <line x1="30" y1="70" x2="170" y2="70" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
             <circle cx="80" cy="70" r="6" fill="#3b82f6"/>
@@ -1028,8 +1106,8 @@
         <div class="tape"></div>
         <div class="polaroid-photo">
           <svg width="100%" height="100%" viewBox="0 0 200 150" fill="none">
-            <rect width="200" height="150" fill="#f8fafc"/>
-            <rect x="30" y="15" width="140" height="120" rx="4" fill="white" stroke="#e2e8f0" stroke-width="2"/>
+            <rect width="200" height="150" fill="#FAF8F5"/>
+            <rect x="30" y="15" width="140" height="120" rx="4" fill="white" stroke="#e2e8f0" stroke-width="2" filter="url(#handdrawn)"/>
             <circle cx="100" cy="45" r="14" fill="#d1fae5"/>
             <path d="M94 45 l4 4 l8-8" stroke="#10b981" stroke-width="2" fill="none"/>
             <text x="50" y="80" font-family="sans-serif" font-size="9" font-weight="bold" fill="#0f172a">Please verify email</text>
@@ -1062,17 +1140,17 @@
 
       <!-- Hand-written Annotations -->
       <div class="board-annotation" style="left: 150px; top: 40px; transform: rotate(-3deg);">Aryan: Let's avoid high-cost cloud GPU servers!</div>
-      <div class="board-annotation" style="left: 1400px; top: 80px; transform: rotate(3deg); color: #10B981;">Siddharth: System specs finalized here!</div>
+      <div class="board-annotation" style="left: 1400px; top: 80px; transform: rotate(3deg); color: #059669;">Siddharth: System specs finalized here!</div>
       <div class="board-annotation" style="left: 930px; top: 90px; transform: rotate(-3deg);">Emily: Next.js Studio layouts tested ok!</div>
-      <div class="board-annotation" style="left: 450px; top: 1100px; transform: rotate(-5deg); color: #EF4444;">API CORS failure was a major blocker!</div>
-      <div class="board-annotation" style="left: 1720px; top: 2150px; transform: rotate(4deg); color: #8B5CF6;">Automatic DB reflection handles missing columns!</div>
-      <div class="board-annotation" style="left: 420px; top: 3550px; transform: rotate(-2deg); color: #EF4444;">Auth format check was dropping requests!</div>
-      <div class="board-annotation" style="left: 1420px; top: 4580px; transform: rotate(3deg); color: #3B82F6;">Celery/Redis not needed - BackgroundTasks work!</div>
+      <div class="board-annotation" style="left: 450px; top: 1100px; transform: rotate(-5deg); color: #DC2626;">API CORS failure was a major blocker!</div>
+      <div class="board-annotation" style="left: 1720px; top: 2150px; transform: rotate(4deg); color: #7C3AED;">Automatic DB reflection handles missing columns!</div>
+      <div class="board-annotation" style="left: 420px; top: 3550px; transform: rotate(-2deg); color: #DC2626;">Auth format check was dropping requests!</div>
+      <div class="board-annotation" style="left: 1420px; top: 4580px; transform: rotate(3deg); color: #1D4ED8;">Celery/Redis not needed - BackgroundTasks work!</div>
       <div class="board-annotation" style="left: 400px; top: 5620px; transform: rotate(-4deg); color: #D97706;">Balance checked at start but subtracted later - FIXED!</div>
-      <div class="board-annotation" style="left: 2000px; top: 6920px; transform: rotate(2deg); color: #EF4444;">Render free tier wipes /static directory on reload!</div>
+      <div class="board-annotation" style="left: 2000px; top: 6920px; transform: rotate(2deg); color: #DC2626;">Render free tier wipes static directory on reload!</div>
       <div class="board-annotation" style="left: 430px; top: 8220px; transform: rotate(-3deg); color: #D97706;">Free dynamic tunnel sockets expire after 24h!</div>
-      <div class="board-annotation" style="left: 1420px; top: 9220px; transform: rotate(2deg); color: #10B981;">WebP compression saves 70% storage!</div>
-      <div class="board-annotation" style="left: 1400px; top: 9480px; transform: rotate(-1deg); color: #10B981;">Emily: Full regression testing complete. Stable!</div>
+      <div class="board-annotation" style="left: 1420px; top: 9220px; transform: rotate(2deg); color: #059669;">WebP compression saves 70% storage!</div>
+      <div class="board-annotation" style="left: 1400px; top: 9480px; transform: rotate(-1deg); color: #059669;">Emily: Full regression testing complete. Stable!</div>
 
     </div>
   </div>
@@ -1090,18 +1168,18 @@
       { id: 'cors_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'CORS Errors', content: 'Gallery images fail to render in browser client, producing HTTP Access-Control header drop logs.', x: 2150, y: 600, color: 'red' },
       { id: 'cors_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Console Logs', content: 'Evaluation: evaluated response headers in console. Found missing headers when browser requests assets from Secure Tunnel Layer directly.', x: 2150, y: 800, color: 'yellow' },
       { id: 'cors_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Bridge Lock', content: 'CORS Block Cause: Outbound DNS tunnels apply strict origin checks, preventing external domains from calling static directories.', x: 2150, y: 1000, color: 'purple' },
-      { id: 'cors_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Proxy Setup', content: 'Proxy Setup: Wrote FastAPI /proxy-image?url=... endpoint. Backend fetches tunnel assets server-to-server and pipes data.', x: 2150, y: 1200, color: 'green' },
+      { id: 'cors_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Proxy Setup', content: 'Proxy Setup: Wrote API proxy endpoint to fetch tunnel assets server-to-server and stream data.', x: 2150, y: 1200, color: 'green' },
       { id: 'cors_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Success Test', content: 'Verification: Dispatched parallel client request lists. Stream routes returned valid binary frames instantly.', x: 2150, y: 1400, color: 'blue' },
       { id: 'cors_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Clean Pipeline', content: 'Resolved: Images render in Next.js grid without CORS exceptions or authorization lockouts.', x: 2150, y: 1600, color: 'green' },
 
       // ROW 2: Winding Backbone Timeline (Right-to-Left)
-      { id: 'backend', type: 'milestone', step: '05', title: 'Backend Development', category: 'Backend', label: 'Backend Development', content: 'Coding Uvicorn wrapper routes, setting CORS policies, input text moderation blocks, and email dispatchers.', x: 1500, y: 1750, color: 'purple' },
+      { id: 'backend', type: 'milestone', step: '05', title: 'Backend Development', category: 'Backend', label: 'Backend Development', content: 'Coding API wrapper routes, setting CORS policies, input text moderation blocks, and email dispatchers.', x: 1500, y: 1750, color: 'purple' },
       { id: 'database', type: 'milestone', step: '06', title: 'Database Integration', category: 'Data', label: 'Database Integration', content: 'Linking PostgreSQL database pools, setting up credentials schemas, and history seed records tables.', x: 850, y: 1800, color: 'yellow' },
 
       // DB Migration Debugging Path (Right Branch - Vertical flow)
       { id: 'db_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'DB Schema Mismatch', content: 'Schema Mismatch: API server crashes during sign-up requests due to missing columns in production table indexes.', x: 850, y: 2150, color: 'red' },
       { id: 'db_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'CLI reflection', content: 'Check columns: Run database reflections in local CLI. Found that columns like is_active were not created on remote tables.', x: 850, y: 2350, color: 'yellow' },
-      { id: 'db_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Tables Out of Sync', content: 'Tables Out-of-Sync: Standard SQLAlchemy calls do not create missing columns on boot if tables are already created.', x: 850, y: 2550, color: 'purple' },
+      { id: 'db_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Tables Out of Sync', content: 'Tables Out-of-Sync: Standard SQL operations do not create missing columns on boot if tables are already created.', x: 850, y: 2550, color: 'purple' },
       { id: 'db_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Auto-Migrations', content: 'Auto-Migrations: Programmed a startup reflection hook that compares structures and runs raw ALTER TABLE commands.', x: 850, y: 2750, color: 'green' },
       { id: 'db_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Boot verify', content: 'Boot Verification: Restarted server deployments. Startup logs verified that columns were safely added.', x: 850, y: 2950, color: 'blue' },
       { id: 'db_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Migrations Safe', content: 'Migrations Safe: Production database is auto-synchronized on boot without manual scripting operations.', x: 850, y: 3150, color: 'green' },
@@ -1124,7 +1202,7 @@
       { id: 'email_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Signup Latency', content: 'Signup Latency: The signup flow hung or crashed during mail dispatch, locking user interface.', x: 850, y: 5150, color: 'red' },
       { id: 'email_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Route Profiling', content: 'Profile routes: Tracked API processing times. Handshake connections with external SMTP ports took over 8 seconds.', x: 850, y: 5350, color: 'yellow' },
       { id: 'email_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Synchronous SMTP', content: 'Synchronous Threads: Emails were dispatched synchronously in the primary request thread, stalling responses.', x: 850, y: 5550, color: 'purple' },
-      { id: 'email_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Async Tasks', content: 'Async Tasks: Modified FastAPI routes to dispatch verification emails using a background task (BackgroundTasks).', x: 850, y: 5750, color: 'green' },
+      { id: 'email_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Async Tasks', content: 'Async Tasks: Modified API routes to dispatch verification emails using a background task.', x: 850, y: 5750, color: 'green' },
       { id: 'email_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Registration Test', content: 'Test register: Dispatched signup requests. Server returned immediately while SMTP task completed in parallel.', x: 850, y: 5950, color: 'blue' },
       { id: 'email_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Signup Fast', content: 'Signup Fast: User creation takes <100ms, while emails dispatch concurrently in background threads.', x: 850, y: 6150, color: 'green' },
 
@@ -1135,20 +1213,20 @@
       { id: 'credit_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Credit Bypass', content: 'Credit Bypass: Users bypass credit bounds by triggering concurrent generations on multiple tabs.', x: 1500, y: 6650, color: 'red' },
       { id: 'credit_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Concurrency Test', content: 'Concurrent calls: Dispatched 5 simultaneous generation POST actions. User generated 5 images despite having 1 credit.', x: 1500, y: 6850, color: 'yellow' },
       { id: 'credit_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Async Gap', content: 'Async Gap: Credits checked at start but subtracted only after image finishes rendering, leaving a validation window.', x: 1500, y: 7050, color: 'purple' },
-      { id: 'credit_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Pre-Deduction', content: 'Pre-Deduction: Deduct credits first inside sql transaction block. If generation task aborts, execute balance refund.', x: 1500, y: 7250, color: 'green' },
+      { id: 'credit_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Pre-Deduction', content: 'Pre-Deduction: Deduct credits first inside SQL transaction block. If generation task aborts, execute balance refund.', x: 1500, y: 7250, color: 'green' },
       { id: 'credit_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Race test check', content: 'Race check: Dispatched simultaneous generation queues again. DB locked, only first request processed.', x: 1500, y: 7450, color: 'blue' },
       { id: 'credit_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Credit Lock', content: 'Credit Lock: Credit verification locks database row immediately on submission, preventing concurrency leaks.', x: 1500, y: 7650, color: 'green' },
 
       // ROW 6: Winding Backbone Timeline (Right-to-Left)
-      { id: 'ai_infra', type: 'milestone', step: '10', title: 'AI Generation Infrastructure', category: 'AI Engine', label: 'AI Generation Infrastructure', content: 'Connecting local AI Inference Engine nodes. Parsing workflow JSON parameters and seeds.', x: 2150, y: 7800, color: 'pink' },
+      { id: 'ai_infra', type: 'milestone', step: '10', title: 'AI Infrastructure', category: 'AI Engine', label: 'AI Generation Infrastructure', content: 'Connecting local AI Inference Engine nodes. Parsing workflow JSON parameters and seeds.', x: 2150, y: 7800, color: 'pink' },
       { id: 'deploy', type: 'milestone', step: '11', title: 'Cloud Deployment', category: 'Deploy', label: 'Cloud Deployment', content: 'Releasing Next.js app to Vercel and backend services API to Render instances.', x: 1500, y: 7850, color: 'purple' },
 
       // Ephemeral Disk Debugging Path (Right Branch - Vertical flow)
       { id: 'disk_prob', type: 'problem', step: '🔴', title: 'Problem Detected', label: 'Images Wiped', content: 'Images Wiped: Previously generated cached images suddenly fail to load after a few hours of backend scale-downs.', x: 1500, y: 8200, color: 'red' },
       { id: 'disk_invest', type: 'investigation', step: '🟡', title: 'Investigation Started', label: 'Disk Inspection', content: 'Check disk: Inspected folder sizes inside Render container filesystem. Directory was empty after scale-down sleep states.', x: 1500, y: 8400, color: 'yellow' },
       { id: 'disk_cause', type: 'root_cause', step: '🟣', title: 'Root Cause Found', label: 'Ephemeral Disks', content: 'Ephemeral Disks: Cloud containers run stateless containers that clear local caches upon environment scale-down/redeployments.', x: 1500, y: 8600, color: 'purple' },
-      { id: 'disk_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Self-Healing Fallback', content: 'Fallback Logic: Wrote proxy checks that automatically fetch missing WebP files from GPU node on-the-fly and refresh disk.', x: 1500, y: 8800, color: 'green' },
-      { id: 'disk_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Simulate Wipe', content: 'Simulate Wipes: Wiped cache folder manually and requested image via proxy stream. Proxy successfully rebuilt WebP.', x: 1500, y: 9000, color: 'blue' },
+      { id: 'disk_fix', type: 'fix', step: '🟢', title: 'Fix Applied', label: 'Self-Healing Fallback', content: 'Fallback Logic: Wrote proxy checks that automatically fetch missing files from local GPU node on-the-fly and refresh disk.', x: 1500, y: 8800, color: 'green' },
+      { id: 'disk_val', type: 'validation', step: '🔵', title: 'Outcome / Retested', label: 'Simulate Wipe', content: 'Simulate Wipes: Wiped cache folder manually and requested image via proxy stream. Proxy successfully rebuilt file.', x: 1500, y: 9000, color: 'blue' },
       { id: 'disk_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Self-healing Active', content: 'Self-healing: Wiped container disk is transparent to user; proxy rebuilds dynamic local caches silently.', x: 1500, y: 9200, color: 'green' },
 
       // ROW 7: Winding Backbone Timeline (Left-to-Right)
@@ -1164,7 +1242,7 @@
       { id: 'tunnel_res', type: 'resolved', step: '🟢', title: 'Resolved', label: 'Monitoring Active', content: 'Monitoring Active: Logging alert routes alert the server operator to restart the tunnel when a bridge connection drops.', x: 200, y: 10750, color: 'green' },
 
       // ROW 8: Winding Backbone Timeline (Right-to-Left)
-      { id: 'opt', type: 'milestone', step: '14', title: 'Optimization Phase', category: 'Perf', label: 'Optimization Phase', content: 'Converting raw output PNG graphics to 85% WebP files asynchronously in parallel caching tasks.', x: 850, y: 10900, color: 'green' },
+      { id: 'opt', type: 'milestone', step: '14', title: 'Optimization Phase', category: 'Perf', label: 'Optimization Phase', content: 'Converting raw output PNG graphics to WebP files asynchronously in parallel caching tasks.', x: 850, y: 10900, color: 'green' },
       { id: 'live', type: 'milestone', step: '15', title: 'Current Live Version', category: 'Live', label: 'Current Live State', content: 'Antrix AI V2 is Stable & Live: The final production-ready state with all bugs resolved, optimization complete, and active monitoring.', x: 1500, y: 10950, color: 'green' },
 
       // ROADMAP BRANCHES (Branching off Live node)
@@ -1261,26 +1339,20 @@
       { from: 'live', fromDock: 'right', to: 'rm_enter', toDock: 'left', type: 'roadmap' }
     ];
 
-    // Sticky Notes (Attached to specific coordinates near slides)
+    // Predefined sticky notes scattered across the canvas
     const stickies = [
       { id: 'sticky_1', color: 'yellow', text: "Let's make sure the client NEVER gets the raw bridge tunnel URL directly. Route everything through an API proxy!", x: 500, y: 450, author: 'Founder Note', rot: -3 },
-      { id: 'sticky_2', color: 'blue', text: "Spent hours debugging API routing! Browsers block cross-origin calls to dynamic tunnel endpoints.", x: 2450, y: 700, author: 'PM log', rot: 4 },
-      { id: 'sticky_3', color: 'pink', text: "Database migration mismatch discovered! We need automatic schema migrations running inside the application boot process.", x: 500, y: 2200, author: 'PM log', rot: -2 },
-      { id: 'sticky_4', color: 'yellow', text: "Authentication failed because token validation logic was incorrect! Token validation dropped requests due to format variations.", x: 500, y: 3450, author: 'Engineer Log', rot: 3 },
-      { id: 'sticky_5', color: 'blue', text: "Email delivery investigation: SMTP handshakes take too long, blocking user registration threads. We need background workers!", x: 1200, y: 4950, author: 'Engineer Log', rot: -4 },
-      { id: 'sticky_6', color: 'pink', text: "Race condition allowed over-generation! Check-before-deduct creates window of credit evasion. Deduct immediately on start.", x: 1200, y: 6450, author: 'Engineer Note', rot: 3 },
-      { id: 'sticky_7', color: 'yellow', text: "Deployment environment mismatch & wipes! Render instance wipes directory on restarts. We must fall back to remote fetch if empty.", x: 1200, y: 8000, author: 'Founder Note', rot: -2 },
-      { id: 'sticky_8', color: 'blue', text: "Tunnel disconnected after 24h: Free tunnel allocation has uptime bounds. We need error locks and named tunnels.", x: 500, y: 9550, author: 'PM Note', rot: 3 },
-      
-      // Side notes requested as examples
-      { id: 'sticky_example_1', color: 'green', text: "Authentication finally stabilized", x: 740, y: 3220, author: 'Discovery', rot: -2 },
-      { id: 'sticky_example_2', color: 'yellow', text: "Deployment issue traced to environment mismatch", x: 2020, y: 7720, author: 'Lessons Learned', rot: 4 },
-      { id: 'sticky_example_3', color: 'pink', text: "Database migration unexpectedly failed", x: 1380, y: 1720, author: 'Observation', rot: -3 },
-      { id: 'sticky_example_4', color: 'blue', text: "Email verification flow required multiple iterations", x: 1380, y: 4720, author: 'Discovery', rot: 2 },
-      { id: 'sticky_example_5', color: 'green', text: "Production routing bug resolved", x: 740, y: 9280, author: 'Founder Note', rot: -1 }
+      { id: 'sticky_2', color: 'blue', text: "Spent 3 hours debugging deployment! Render free container scale-down wipes static cache folders.", x: 2020, y: 7720, author: 'Founder Log', rot: 4 },
+      { id: 'sticky_3', color: 'pink', text: "Database migration failed here! Standard SQLAlchemy reflections do not automatically modify column sets on pre-existing structures.", x: 1380, y: 1720, author: 'Observation', rot: -3 },
+      { id: 'sticky_4', color: 'yellow', text: "Finally fixed authentication! Format checks and cookie parsing keys unified in API route middleware.", x: 740, y: 3220, author: 'Discovery', rot: -2 },
+      { id: 'sticky_5', color: 'blue', text: "Email verification working now! SMTP handshakes shifted from request threads to FastAPI BackgroundTasks.", x: 1380, y: 4720, author: 'Discovery', rot: 2 },
+      { id: 'sticky_6', color: 'pink', text: "Major breakthrough: deducted credits inside transaction block BEFORE queue submissions, protecting balances from race leaks.", x: 1200, y: 6450, author: 'Founder Note', rot: 3 },
+      { id: 'sticky_7', color: 'yellow', text: "Production issue discovered: Free dynamic tunnel sockets expire after 24h, dropping backend operations. Configured named tunnels.", x: 740, y: 9280, author: 'Observation', rot: -1 },
+      { id: 'sticky_8', color: 'blue', text: "Generation pipeline connected! Prompts, negative values, resolution inputs, steps, and seed overrides route cleanly down the socket.", x: 2320, y: 7400, author: 'Founder Log', rot: 3 },
+      { id: 'sticky_9', color: 'green', text: "Cloud deployment stable: Vercel frontend edge connects smoothly to Render services backend.", x: 1380, y: 7550, author: 'Log Note', rot: -2 }
     ];
 
-    // Polaroids
+    // Predefined Polaroid locations
     const polaroids = [
       { id: 'polaroid-1', x: 2150, y: 50 },
       { id: 'polaroid-2', x: 200, y: 1250 },
@@ -1288,7 +1360,7 @@
       { id: 'polaroid-4', x: 200, y: 9200 }
     ];
 
-    // Sketches
+    // Predefined whiteboard sketches locations
     const sketches = [
       { id: 'sketch-arch', x: 150, y: 540 },
       { id: 'sketch-db', x: 1450, y: 2200 },
@@ -1320,6 +1392,7 @@
 
     // Initialize Layout & Dynamic Content
     window.addEventListener("load", () => {
+      buildNotebookSpirals();
       renderNodes();
       drawConnections();
       buildJumpPanel();
@@ -1329,6 +1402,30 @@
       updateMinimap();
       startCollaboratorSim();
     });
+
+    // Build Metal Spiral Rings on the left margin
+    function buildNotebookSpirals() {
+      const ringsContainer = document.createElement("div");
+      ringsContainer.className = "notebook-rings";
+      ringsContainer.style.position = "absolute";
+      ringsContainer.style.left = "35px";
+      ringsContainer.style.top = "0";
+      ringsContainer.style.width = "30px";
+      ringsContainer.style.height = "12000px";
+      ringsContainer.style.zIndex = "99";
+      ringsContainer.style.pointerEvents = "none";
+      ringsContainer.style.display = "flex";
+      ringsContainer.style.flexDirection = "column";
+
+      for (let y = 60; y < 12000; y += 120) {
+        const ring = document.createElement("div");
+        ring.className = "notebook-ring";
+        ring.style.position = "absolute";
+        ring.style.top = `${y}px`;
+        ringsContainer.appendChild(ring);
+      }
+      canvas.appendChild(ringsContainer);
+    }
 
     // Render Milestone & Debug presentation slide cards
     function renderNodes() {
@@ -1369,9 +1466,28 @@
         `;
         canvas.appendChild(card);
       });
+
+      // Render Predefined Stickies
+      stickies.forEach(st => {
+        const stickyEl = document.createElement("div");
+        stickyEl.className = `sticky-note sticky-${st.color} draggable-sticky`;
+        stickyEl.id = st.id;
+        stickyEl.style.left = `${st.x}px`;
+        stickyEl.style.top = `${st.y}px`;
+        stickyEl.style.transform = `rotate(${st.rot}deg)`;
+
+        stickyEl.innerHTML = `
+          <div class="sticky-note-bg"></div>
+          <div class="sticky-note-content">
+            <div class="sticky-text" contenteditable="true" onblur="updateStickyText('${st.id}', this.innerText)">${st.text}</div>
+            <div class="sticky-footer">— ${st.author}</div>
+          </div>
+        `;
+        canvas.appendChild(stickyEl);
+      });
     }
 
-    // Dynamic Connections Drawer using Bezier Curves and n8n workflow styles
+    // Dynamic Connections Drawer using Bezier Curves and hand-drawn styling
     function drawConnections() {
       // Clear existing paths except markers
       const existingPaths = svgConnections.querySelectorAll(".connection-line, .arrowhead");
@@ -1397,7 +1513,7 @@
 
         // Compute curved bezier path
         let pathD = '';
-        let strokeColor = '#0F172A';
+        let strokeColor = '#1E293B';
         let strokeStyle = 'solid';
         let strokeW = 2.5;
 
@@ -1460,7 +1576,7 @@
       }
     }
 
-    // Build Jump panel list
+    // Build Index panel list
     function buildJumpPanel() {
       const msList = document.getElementById("jump-milestones-list");
       const dbList = document.getElementById("jump-debugging-list");
@@ -1507,32 +1623,36 @@
         const dx = canvasCoords.x - dragStartX;
         const dy = canvasCoords.y - dragStartY;
 
-        activeDragEl.style.left = `${dragOffsetLeft + dx}px`;
-        activeDragEl.style.top = `${dragOffsetTop + dy}px`;
+        const newX = dragOffsetLeft + dx;
+        const newY = dragOffsetTop + dy;
 
-        // Update arrays to keep coordinates in sync
-        const nodeObj = nodes.find(n => n.id === activeDragEl.id);
+        activeDragEl.style.left = `${newX}px`;
+        activeDragEl.style.top = `${newY}px`;
+
+        // Update data array values to sync redraws
+        const nodeId = activeDragEl.id;
+        const nodeObj = nodes.find(n => n.id === nodeId);
         if (nodeObj) {
-          nodeObj.x = dragOffsetLeft + dx;
-          nodeObj.y = dragOffsetTop + dy;
+          nodeObj.x = newX;
+          nodeObj.y = newY;
         }
 
-        const stickyObj = stickies.find(s => s.id === activeDragEl.id);
+        const stickyObj = stickies.find(s => s.id === nodeId);
         if (stickyObj) {
-          stickyObj.x = dragOffsetLeft + dx;
-          stickyObj.y = dragOffsetTop + dy;
+          stickyObj.x = newX;
+          stickyObj.y = newY;
         }
 
-        const polaroidObj = polaroids.find(p => p.id === activeDragEl.id);
-        if (polaroidObj) {
-          polaroidObj.x = dragOffsetLeft + dx;
-          polaroidObj.y = dragOffsetTop + dy;
+        const polObj = polaroids.find(p => p.id === nodeId);
+        if (polObj) {
+          polObj.x = newX;
+          polObj.y = newY;
         }
 
-        const sketchObj = sketches.find(s => s.id === activeDragEl.id);
-        if (sketchObj) {
-          sketchObj.x = dragOffsetLeft + dx;
-          sketchObj.y = dragOffsetTop + dy;
+        const skObj = sketches.find(s => s.id === nodeId);
+        if (skObj) {
+          skObj.x = newX;
+          skObj.y = newY;
         }
 
         drawConnections();
@@ -1541,60 +1661,61 @@
 
       window.addEventListener("mouseup", () => {
         if (activeDragEl) {
-          activeDragEl.style.zIndex = activeDragEl.classList.contains('sticky-note') ? 18 : 20;
+          activeDragEl.style.zIndex = activeDragEl.classList.contains("sticky-note") ? 18 : 20;
           activeDragEl = null;
         }
       });
     }
 
-    // Get Canvas Space Coordinates from Screen Event
+    // Translate window client points to local canvas coordinate spaces
     function getCanvasCoords(e) {
       const rect = viewport.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left - translateX) / scale,
-        y: (clientY - rect.top - translateY) / scale
-      };
+      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+      const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+      const x = (clientX - rect.left - translateX) / scale;
+      const y = (clientY - rect.top - translateY) / scale;
+      return { x, y };
     }
 
-    // Set active toolbar action
-    function setTool(tool) {
-      activeTool = tool;
+    function updateStickyText(stickyId, newText) {
+      const st = stickies.find(s => s.id === stickyId);
+      if (st) st.text = newText;
+    }
+
+    // Select Active Toolbar tool state
+    function setTool(toolName) {
+      activeTool = toolName;
       document.querySelectorAll(".tool-btn").forEach(btn => btn.classList.remove("active"));
-      document.getElementById(`tool-${tool}`).classList.add("active");
-
-      if (tool === 'pen') {
-        viewport.style.cursor = 'crosshair';
-        drawingSvg.style.pointerEvents = 'auto';
-      } else {
-        viewport.style.cursor = 'grab';
-        drawingSvg.style.pointerEvents = 'none';
-      }
+      document.getElementById(`tool-${toolName}`).classList.add("active");
+      
+      viewport.style.cursor = toolName === 'pen' ? 'crosshair' : (toolName === 'select' ? 'grab' : 'default');
     }
 
-    // Pen Doodling Tool implementation
+    // Canvas Pen Doodling Drawing Events
     function setupDrawingEvents() {
-      drawingSvg.addEventListener("mousedown", (e) => {
+      canvas.addEventListener("mousedown", (e) => {
         if (activeTool !== 'pen') return;
         isDrawing = true;
+        
         const coords = getCanvasCoords(e);
-
         currentDrawingPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
         currentDrawingPath.setAttribute("class", "drawing-path");
-        currentDrawingPath.setAttribute("stroke", "#3B82F6"); // Default blue marker
-        currentDrawingPath.setAttribute("stroke-width", "3.5");
-        currentDrawingPath.setAttribute("d", `M ${coords.x} ${coords.y}`);
+        currentDrawingPath.setAttribute("stroke", "#1E293B"); /* Blue-slate ink pen */
+        currentDrawingPath.setAttribute("stroke-width", "2.5");
+        currentDrawingPath.setAttribute("fill", "none");
+        
+        const d = `M ${coords.x} ${coords.y}`;
+        currentDrawingPath.setAttribute("d", d);
         drawingSvg.appendChild(currentDrawingPath);
-
-        e.stopPropagation();
       });
 
-      drawingSvg.addEventListener("mousemove", (e) => {
-        if (!isDrawing || activeTool !== 'pen') return;
+      window.addEventListener("mousemove", (e) => {
+        if (!isDrawing || !currentDrawingPath) return;
         const coords = getCanvasCoords(e);
-        const d = currentDrawingPath.getAttribute("d");
-        currentDrawingPath.setAttribute("d", `${d} L ${coords.x} ${coords.y}`);
+        
+        let d = currentDrawingPath.getAttribute("d");
+        d += ` L ${coords.x} ${coords.y}`;
+        currentDrawingPath.setAttribute("d", d);
       });
 
       window.addEventListener("mouseup", () => {
@@ -1621,7 +1742,7 @@
     // Clear board doodles
     function clearBoard() {
       drawingSvg.innerHTML = '';
-      // Remove only user stickies (not the predefined ones)
+      // Remove only user stickies
       const allStickies = document.querySelectorAll(".sticky-note");
       allStickies.forEach(st => {
         if (!stickies.some(s => s.id === st.id)) {
@@ -1640,8 +1761,8 @@
         id: `custom_sticky_${Date.now()}`,
         color: ['yellow', 'blue', 'pink', 'green'][Math.floor(Math.random() * 4)],
         text: 'Double click to edit note...',
-        x: coords.x - 95,
-        y: coords.y - 95,
+        x: coords.x - 100,
+        y: coords.y - 100,
         author: 'Founder',
         rot: Math.floor(Math.random() * 8) - 4
       };
@@ -1800,12 +1921,12 @@
       updateMinimap();
     }
 
-    // Toggle Navigation Drawer panel
+    // Toggle Index Drawer panel
     function toggleJumpPanel() {
       document.getElementById("jump-drawer").classList.toggle("open");
     }
 
-    // Realtime Cursors Simulators (Multiplayer War Room)
+    // Realtime Cursors Simulators (Founder War Room)
     const cursors = [
       { id: 'c1', name: 'Aryan (Founder)', color: '#EF4444', x: 1350, y: 400, tx: 1350, ty: 400 },
       { id: 'c2', name: 'Siddharth (Backend)', color: '#22C55E', x: 1050, y: 750, tx: 1050, ty: 750 },
