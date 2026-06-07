@@ -887,6 +887,105 @@
     }
 
     .minimap-dot.milestone { background: #3B82F6; width: 5px; height: 5px; }
+
+    /* Mobile Responsiveness Media Queries */
+    @media (max-width: 768px) {
+      .viewport {
+        touch-action: none;
+      }
+      .canvas {
+        touch-action: none;
+      }
+      .notebook-rings {
+        display: none !important; /* Hide metal spiral rings to save screen space */
+      }
+      .canvas::before {
+        left: 40px; /* shift red margin line */
+      }
+      .board-header {
+        top: 8px;
+        left: 8px;
+        padding: 6px 10px;
+        max-width: 55%;
+        box-shadow: 2px 2px 0px var(--border-slate);
+      }
+      .board-title-text {
+        font-size: 13px;
+      }
+      .board-badge {
+        display: none !important; /* Hide badge to prevent header text overflow */
+      }
+      .collaborators {
+        top: 8px;
+        right: 8px;
+        padding: 4px 8px;
+        gap: 4px;
+        box-shadow: 2px 2px 0px var(--border-slate);
+      }
+      .avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 9px;
+      }
+      .toolbar {
+        left: 8px;
+        padding: 4px;
+        gap: 6px;
+        box-shadow: 2px 2px 0px var(--border-slate);
+      }
+      .tool-btn {
+        width: 34px;
+        height: 34px;
+      }
+      .tool-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .zoom-control {
+        left: 8px;
+        bottom: 8px;
+        padding: 4px 8px;
+        font-size: 11px;
+        box-shadow: 2px 2px 0px var(--border-slate);
+      }
+      .zoom-btn {
+        font-size: 14px;
+      }
+      .jump-panel-toggle {
+        left: 8px;
+        bottom: 50px;
+        padding: 6px 10px;
+        font-size: 11px;
+        box-shadow: 2px 2px 0px var(--border-slate);
+      }
+      .jump-drawer {
+        bottom: 95px;
+        width: 220px;
+        max-height: 280px;
+        padding: 8px;
+        box-shadow: 3px 3px 0px var(--border-slate);
+      }
+      .minimap-container {
+        display: none !important; /* Hide minimap on mobile screen sizes to declutter view */
+      }
+      .node-card {
+        width: 90vw; /* fluid cards on small viewports */
+        max-width: 480px;
+      }
+      .node-card.problem,
+      .node-card.investigation,
+      .node-card.root_cause,
+      .node-card.fix,
+      .node-card.validation,
+      .node-card.resolved {
+        width: 90vw;
+        max-width: 420px;
+      }
+      .whiteboard-sketch {
+        width: 90vw !important;
+        max-width: 600px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1368,7 +1467,7 @@
     ];
 
     // Global Interactive Panning/Drawing State
-    let scale = 1;
+    let scale = window.innerWidth <= 768 ? 0.45 : 1;
     let translateX = 0;
     let translateY = 0;
     let isDraggingCanvas = false;
@@ -1817,16 +1916,18 @@
     // Mobile touch controls (Pan & Pinch-to-Zoom)
     let touchStartDist = 0;
     viewport.addEventListener("touchstart", (e) => {
-      if (e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header')) return;
+      if (e.target.closest('.toolbar') || e.target.closest('.zoom-control') || e.target.closest('.board-header') || e.target.closest('.jump-panel-toggle') || e.target.closest('.jump-drawer')) return;
       
       if (e.touches.length === 1) {
         isDraggingCanvas = true;
         startX = e.touches[0].clientX - translateX;
         startY = e.touches[0].clientY - translateY;
       } else if (e.touches.length === 2) {
+        isDraggingCanvas = false; // Stop canvas panning to zoom instead
         touchStartDist = getTouchDistance(e.touches);
       }
-    });
+      e.preventDefault();
+    }, { passive: false });
 
     viewport.addEventListener("touchmove", (e) => {
       if (isDraggingCanvas && e.touches.length === 1) {
@@ -1834,18 +1935,23 @@
         translateY = e.touches[0].clientY - startY;
         updateTransform();
         updateMinimap();
+        e.preventDefault();
       } else if (e.touches.length === 2) {
         const dist = getTouchDistance(e.touches);
-        const delta = dist / touchStartDist;
-        scale = Math.min(Math.max(scale * delta, 0.2), 2);
+        if (touchStartDist > 0) {
+          const delta = dist / touchStartDist;
+          scale = Math.min(Math.max(scale * delta, 0.15), 2);
+          updateTransform();
+          updateMinimap();
+        }
         touchStartDist = dist;
-        updateTransform();
-        updateMinimap();
+        e.preventDefault();
       }
-    });
+    }, { passive: false });
 
-    viewport.addEventListener("touchend", () => {
+    viewport.addEventListener("touchend", (e) => {
       isDraggingCanvas = false;
+      touchStartDist = 0;
     });
 
     function getTouchDistance(touches) {
